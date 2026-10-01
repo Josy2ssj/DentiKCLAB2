@@ -47,7 +47,7 @@ export default function WorkTypes() {
       {/* Chart + Legend */}
       <div className="flex-1 flex items-center gap-3">
         {/* Donut Chart */}
-        <div className="relative flex-1" style={{ minHeight: '130px', maxWidth: '160px' }}>
+        <div className="relative" style={{ width: '160px', height: '160px', flexShrink: 0 }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

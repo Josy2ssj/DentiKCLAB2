@@ -55,7 +55,7 @@ function AppContent() {
       </div>
 
       <SettingsModal />
-      {import.meta.env.DEV && <LayoutDebugger />}
+      {/* LayoutDebugger deshabilitado - solo disponible en source para desarrollo */}
     </div>
   );
 }

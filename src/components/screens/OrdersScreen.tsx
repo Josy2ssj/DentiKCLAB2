@@ -8,7 +8,7 @@ export function OrdersScreen() {
   return (
     <div className="max-w-[1600px] mx-auto h-full flex flex-col">
       {/* Context Area: Header + Notches */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5" style={{ isolation: 'isolate' }}>
         {/* LEFT: Header */}
         <div className="lg:col-span-4 min-w-0">
           <div className="shrink-0">
@@ -33,7 +33,7 @@ export function OrdersScreen() {
       </div>
 
       {/* Workspace Frame: Orders Panel */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 min-h-0" data-workspace="orders-panel">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 min-h-0 relative" style={{ zIndex: 1 }} data-workspace="orders-panel">
         <div className="flex items-center gap-4 mb-6">
           <div className="flex gap-2">
             <button className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium">Todas</button>

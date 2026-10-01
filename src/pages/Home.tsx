@@ -15,7 +15,7 @@ export function Home() {
   return (
     <div className="max-w-[1600px] mx-auto h-full flex flex-col">
       {/* Context Area: Greeting + Notches */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5" style={{ isolation: 'isolate' }}>
         {/* LEFT: Greeting only */}
         <div className="lg:col-span-4 min-w-0">
           <div className="shrink-0">
@@ -32,21 +32,22 @@ export function Home() {
         </div>
 
         {/* CENTER: Pending Orders Notch (backplate only) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative">
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
           <OrderStatusNotch type="pending" compact />
         </div>
 
         {/* RIGHT: Weekly Delivered Notch (backplate only) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative">
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
           <OrderStatusNotch type="weekly-delivered" compact />
         </div>
       </div>
 
       {/* Workspace Frame: White Surfaces */}
       <div
-        className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 flex-1 min-h-0"
+        className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 flex-1 min-h-0 relative"
         style={{
           gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr)',
+          zIndex: 1,
         }}
       >
         {/* LEFT: Patient List (full height) */}

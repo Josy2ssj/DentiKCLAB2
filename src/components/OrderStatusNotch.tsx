@@ -34,7 +34,7 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
           background: 'linear-gradient(155deg, #FFE477 0%, #FFD052 40%, #F6B62E 100%)',
           borderRadius: '20px 20px 0 0',
           boxShadow: '0 4px 20px rgba(246, 182, 46, 0.15)',
-          height: '100px',
+          height: '76px',
           position: 'relative',
         }}
       >
@@ -119,7 +119,7 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
         background: 'linear-gradient(155deg, #79E4C2 0%, #51D8B5 40%, #2EC5A5 100%)',
         borderRadius: '20px 20px 0 0',
         boxShadow: '0 4px 20px rgba(46, 197, 165, 0.15)',
-        height: '100px',
+        height: '76px',
         position: 'relative',
       }}
     >
