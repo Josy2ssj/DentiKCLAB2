@@ -19,7 +19,6 @@ export function Timeline() {
     const start = new Date(currentDate);
     
     if (timeScale === 'week') {
-      // Show 7 days starting from current week
       start.setDate(start.getDate() - start.getDay());
       for (let i = 0; i < 7; i++) {
         const date = new Date(start);
@@ -27,7 +26,6 @@ export function Timeline() {
         dates.push(date);
       }
     } else if (timeScale === 'month') {
-      // Show 4 weeks
       start.setDate(start.getDate() - start.getDay());
       for (let i = 0; i < 28; i++) {
         const date = new Date(start);
@@ -35,7 +33,6 @@ export function Timeline() {
         dates.push(date);
       }
     } else {
-      // Show 12 months
       for (let i = 0; i < 12; i++) {
         const date = new Date(start);
         date.setMonth(start.getMonth() + i);
@@ -94,8 +91,8 @@ export function Timeline() {
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <h3 className="text-[15px] font-bold" style={{ color: '#111A35' }}>
-            Timeline de Órdenes
+          <h3 className="text-[15px] font-bold" style={{ color: '#10264A' }}>
+            Órdenes
           </h3>
           
           {/* Time Scale Selector */}
@@ -106,7 +103,7 @@ export function Timeline() {
                 onClick={() => setTimeScale(scale)}
                 className="px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-200"
                 style={{
-                  background: timeScale === scale ? 'linear-gradient(135deg, #121A30 0%, #1C2942 100%)' : 'transparent',
+                  background: timeScale === scale ? 'linear-gradient(135deg, #10264A 0%, #1A3A5C 100%)' : 'transparent',
                   color: timeScale === scale ? '#FFFFFF' : '#4A5568',
                 }}
               >
@@ -128,7 +125,7 @@ export function Timeline() {
             </svg>
           </button>
           
-          <div className="px-3 py-1.5 rounded-lg text-[12px] font-medium" style={{ background: 'rgba(241, 245, 249, 0.8)', color: '#3D4F6F' }}>
+          <div className="px-3 py-1.5 rounded-lg text-[12px] font-medium" style={{ background: 'rgba(241, 245, 249, 0.8)', color: '#10264A' }}>
             {formatDateRange()}
           </div>
           
@@ -149,6 +146,26 @@ export function Timeline() {
           >
             Hoy
           </button>
+
+          <button
+            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            aria-label="Buscar"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7B8BA5" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+          </button>
+
+          <button
+            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            style={{ background: 'rgba(40, 120, 255, 0.1)' }}
+            aria-label="Nueva orden"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2878FF" strokeWidth="2">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -158,7 +175,7 @@ export function Timeline() {
           {/* Main Timeline Line */}
           <div 
             className="absolute left-0 right-0 top-1/2 h-[2px]"
-            style={{ background: 'linear-gradient(90deg, transparent 0%, #E2E8F0 10%, #E2E8F0 90%, transparent 100%)' }}
+            style={{ background: 'linear-gradient(90deg, transparent 0%, #CBD5E1 10%, #CBD5E1 90%, transparent 100%)' }}
           />
 
           {/* Timeline Nodes */}
@@ -172,32 +189,47 @@ export function Timeline() {
                 <div key={index} className="relative flex flex-col items-center" style={{ flex: '1 1 0' }}>
                   {/* Date Label (only for dates with orders) */}
                   {hasOrders && (
-                    <div className="absolute -top-12 flex flex-col items-center">
+                    <div className="absolute -top-16 flex flex-col items-center">
                       <span className="text-[10px] font-medium" style={{ color: '#7B8BA5' }}>
                         {date.toLocaleDateString('es-ES', { weekday: 'short' })}
                       </span>
-                      <span className="text-[11px] font-bold" style={{ color: '#111A35' }}>
+                      <span className="text-[12px] font-bold" style={{ color: '#10264A' }}>
                         {date.getDate()}
                       </span>
                     </div>
                   )}
 
-                  {/* Order Nodes */}
+                  {/* Order Nodes with Branching */}
                   {hasOrders && (
-                    <div className="absolute -top-2 flex flex-col gap-2 items-center">
-                      {dateOrders.slice(0, 3).map((order, orderIndex) => (
-                        <TimelineOrderNode
-                          key={order.id}
-                          order={order}
-                          onClick={() => setSelectedOrder(order)}
-                          delay={orderIndex * 50}
-                        />
-                      ))}
-                      {dateOrders.length > 3 && (
-                        <div className="text-[10px] font-semibold px-2 py-1 rounded-full" style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}>
-                          +{dateOrders.length - 3}
-                        </div>
-                      )}
+                    <div className="absolute -top-2 flex flex-col items-center">
+                      {/* Branch line */}
+                      <div 
+                        className="w-[2px] bg-gray-300"
+                        style={{ 
+                          height: `${Math.min(dateOrders.length * 50, 150)}px`,
+                          marginBottom: '4px',
+                        }}
+                      />
+                      
+                      {/* Order nodes */}
+                      <div className="flex flex-col gap-3 items-center">
+                        {dateOrders.slice(0, 3).map((order, orderIndex) => (
+                          <TimelineOrderNode
+                            key={order.id}
+                            order={order}
+                            onClick={() => setSelectedOrder(order)}
+                            delay={orderIndex * 50}
+                          />
+                        ))}
+                        {dateOrders.length > 3 && (
+                          <div 
+                            className="text-[10px] font-semibold px-2 py-1 rounded-full cursor-pointer transition-all duration-150 hover:scale-105"
+                            style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}
+                          >
+                            +{dateOrders.length - 3}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
 
@@ -208,7 +240,7 @@ export function Timeline() {
                       width: hasOrders ? '12px' : '8px',
                       height: hasOrders ? '12px' : '8px',
                       background: hasOrders ? '#2878FF' : '#CBD5E1',
-                      boxShadow: hasOrders ? '0 0 0 4px rgba(40, 120, 255, 0.1)' : 'none',
+                      boxShadow: hasOrders ? '0 0 0 4px rgba(40, 120, 255, 0.15)' : 'none',
                       border: isToday ? '2px solid #2878FF' : 'none',
                     }}
                   />
@@ -253,7 +285,7 @@ export function Timeline() {
                     onClick={() => setCurrentDate(weekStart)}
                     className="px-3 py-1.5 rounded-full text-[10px] font-semibold transition-all duration-200"
                     style={{
-                      background: isCurrentWeek ? 'linear-gradient(135deg, #121A30 0%, #1C2942 100%)' : 'transparent',
+                      background: isCurrentWeek ? 'linear-gradient(135deg, #10264A 0%, #1A3A5C 100%)' : 'transparent',
                       color: isCurrentWeek ? '#FFFFFF' : '#7B8BA5',
                     }}
                   >
@@ -291,11 +323,52 @@ function TimelineOrderNode({ order, onClick, delay = 0 }: { order: Order; onClic
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return { main: '#F59E0B', glow: 'rgba(245, 158, 11, 0.3)' };
-      case 'in_progress': return { main: '#2878FF', glow: 'rgba(40, 120, 255, 0.3)' };
-      case 'ready': return { main: '#10B981', glow: 'rgba(16, 185, 129, 0.3)' };
-      case 'delivered': return { main: '#8B5CF6', glow: 'rgba(139, 92, 246, 0.3)' };
-      default: return { main: '#CBD5E1', glow: 'rgba(203, 213, 225, 0.3)' };
+      case 'pending': return { main: '#F59E0B', glow: 'rgba(245, 158, 11, 0.4)' };
+      case 'in_progress': return { main: '#2878FF', glow: 'rgba(40, 120, 255, 0.4)' };
+      case 'ready': return { main: '#10B981', glow: 'rgba(16, 185, 129, 0.4)' };
+      case 'delivered': return { main: '#8B5CF6', glow: 'rgba(139, 92, 246, 0.4)' };
+      default: return { main: '#CBD5E1', glow: 'rgba(203, 213, 225, 0.4)' };
+    }
+  };
+
+  const getTreatmentIcon = (treatment: string) => {
+    const treatmentLower = treatment.toLowerCase();
+    if (treatmentLower.includes('alineador')) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={getStatusColor(order.status).main} strokeWidth="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      );
+    } else if (treatmentLower.includes('retenedor')) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={getStatusColor(order.status).main} strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="6" />
+        </svg>
+      );
+    } else if (treatmentLower.includes('modelo')) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={getStatusColor(order.status).main} strokeWidth="2">
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+        </svg>
+      );
+    } else if (treatmentLower.includes('guía')) {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={getStatusColor(order.status).main} strokeWidth="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <path d="M14 2v6h6" />
+          <path d="M9 15l2 2 4-4" />
+        </svg>
+      );
+    } else {
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={getStatusColor(order.status).main} strokeWidth="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <path d="M14 2v6h6" />
+        </svg>
+      );
     }
   };
 
@@ -311,68 +384,69 @@ function TimelineOrderNode({ order, onClick, delay = 0 }: { order: Order; onClic
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Glow Effect */}
+      {/* Enhanced Glow Effect */}
       <div
-        className="absolute inset-0 rounded-full transition-opacity duration-200"
+        className="absolute inset-0 rounded-full transition-all duration-300"
         style={{
           background: `radial-gradient(circle, ${statusColor.glow} 0%, transparent 70%)`,
-          opacity: isHovered ? 1 : 0.5,
-          transform: 'scale(1.5)',
+          opacity: isHovered ? 1 : 0.6,
+          transform: isHovered ? 'scale(2)' : 'scale(1.5)',
+          filter: 'blur(4px)',
         }}
       />
 
       {/* Main Node */}
       <div
-        className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+        className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
         style={{
           background: 'white',
           boxShadow: isHovered 
-            ? `0 4px 12px ${statusColor.glow}, 0 0 0 2px ${statusColor.main}`
-            : '0 2px 8px rgba(17, 26, 53, 0.1)',
+            ? `0 6px 20px ${statusColor.glow}, 0 0 0 3px ${statusColor.main}`
+            : `0 3px 12px rgba(17, 26, 53, 0.1)`,
           transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+          border: `2px solid ${statusColor.main}20`,
         }}
       >
-        {/* Status Indicator */}
+        {/* Status Indicator with Glow */}
         <div
-          className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+          className="absolute -top-1 -right-1 w-4 h-4 rounded-full"
           style={{
             background: statusColor.main,
-            boxShadow: `0 0 0 2px white, 0 0 8px ${statusColor.glow}`,
+            boxShadow: `0 0 0 2px white, 0 0 12px ${statusColor.glow}`,
           }}
         />
 
-        {/* Icon */}
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={statusColor.main} strokeWidth="2">
-          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
+        {/* Treatment Icon */}
+        {getTreatmentIcon(order.treatment)}
       </div>
 
       {/* Hover Tooltip */}
       {isHovered && (
         <div
-          className="absolute left-1/2 -translate-x-1/2 -top-20 w-48 p-3 rounded-xl animate-fadeIn"
+          className="absolute left-1/2 -translate-x-1/2 -top-24 w-52 p-3 rounded-xl animate-fadeIn"
           style={{
             background: 'rgba(255, 255, 255, 0.98)',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 8px 24px rgba(17, 26, 53, 0.12)',
             zIndex: 50,
+            border: '1px solid rgba(255, 255, 255, 0.8)',
           }}
         >
-          <div className="text-[11px] font-bold mb-1" style={{ color: '#111A35' }}>
+          <div className="text-[12px] font-bold mb-1" style={{ color: '#10264A' }}>
             {order.patient}
           </div>
           <div className="text-[10px] mb-2" style={{ color: '#7B8BA5' }}>
             {order.treatment}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full" style={{ background: statusColor.main }} />
-            <span className="text-[9px] font-semibold" style={{ color: statusColor.main }}>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-2 h-2 rounded-full" style={{ background: statusColor.main, boxShadow: `0 0 8px ${statusColor.glow}` }} />
+            <span className="text-[10px] font-semibold" style={{ color: statusColor.main }}>
               {order.status === 'pending' ? 'Pendiente' :
                order.status === 'in_progress' ? 'En proceso' :
                order.status === 'ready' ? 'Listo' : 'Entregado'}
             </span>
           </div>
-          <div className="text-[9px] mt-1" style={{ color: '#7B8BA5' }}>
+          <div className="text-[9px]" style={{ color: '#7B8BA5' }}>
             Responsable: {order.doctor || 'No asignado'}
           </div>
         </div>

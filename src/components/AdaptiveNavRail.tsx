@@ -13,58 +13,27 @@ export function AdaptiveNavRail() {
   const { activeSection, setActiveSection } = useNavigation();
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex items-center justify-center h-dvh pointer-events-none">
+    <aside className="fixed left-4 top-1/2 -translate-y-1/2 z-50 flex items-center justify-center pointer-events-none">
       <div
         className="pointer-events-auto relative"
         style={{
-          width: '72px',
-          height: 'clamp(480px, 62dvh, 560px)',
+          width: '64px',
+          height: 'clamp(420px, 60dvh, 520px)',
         }}
       >
-        {/* Organic SVG silhouette */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 72 560"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="sidebarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0F1729" />
-              <stop offset="70%" stopColor="#15213A" />
-              <stop offset="100%" stopColor="#1A2847" />
-            </linearGradient>
-            <filter id="softShadow">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
-              <feOffset dx="3" dy="0" result="offsetblur" />
-              <feComponentTransfer>
-                <feFuncA type="linear" slope="0.15" />
-              </feComponentTransfer>
-              <feMerge>
-                <feMergeNode />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Organic shape with smooth curves - 24px radius with cubic Bézier */}
-          <path
-            d="M 0,0 L 48,0 C 62,0 72,10 72,24 L 72,536 C 72,550 62,560 48,560 L 0,560 Z"
-            fill="url(#sidebarGrad)"
-            filter="url(#softShadow)"
-          />
-
-          {/* Inner edge highlight */}
-          <path
-            d="M 72,24 L 72,536"
-            stroke="rgba(255,255,255,0.06)"
-            strokeWidth="1"
-            fill="none"
-          />
-        </svg>
+        {/* Light translucent capsule */}
+        <div
+          className="absolute inset-0 rounded-[32px]"
+          style={{
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 8px 32px rgba(17, 38, 74, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+            border: '1px solid rgba(255, 255, 255, 0.8)',
+          }}
+        />
 
         {/* Navigation Items */}
-        <nav className="relative z-10 flex flex-col items-center gap-1 pt-14 pb-10 h-full">
+        <nav className="relative z-10 flex flex-col items-center gap-2 pt-6 pb-6 h-full">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -75,19 +44,19 @@ export function AdaptiveNavRail() {
                 onClick={() => setActiveSection(item.id as any)}
                 className="relative flex items-center justify-center"
                 style={{
-                  width: '48px',
-                  height: '48px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '14px',
-                  transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
                 title={item.label}
                 aria-label={item.label}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.currentTarget.style.transform = 'scale(1.03)';
+                    e.currentTarget.style.background = 'rgba(40, 120, 255, 0.08)';
+                    e.currentTarget.style.transform = 'scale(1.05)';
                     const icon = e.currentTarget.querySelector('svg');
-                    if (icon) icon.style.color = '#E0E7FF';
+                    if (icon) icon.style.color = '#2878FF';
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -95,14 +64,14 @@ export function AdaptiveNavRail() {
                     e.currentTarget.style.background = 'transparent';
                     e.currentTarget.style.transform = 'scale(1)';
                     const icon = e.currentTarget.querySelector('svg');
-                    if (icon) icon.style.color = '#7B8BA5';
+                    if (icon) icon.style.color = '#10264A';
                   }
                 }}
                 onMouseDown={(e) => {
                   e.currentTarget.style.transform = 'scale(0.95)';
                 }}
                 onMouseUp={(e) => {
-                  e.currentTarget.style.transform = isActive ? 'scale(1)' : 'scale(1.03)';
+                  e.currentTarget.style.transform = isActive ? 'scale(1)' : 'scale(1.05)';
                 }}
               >
                 {/* Active background */}
@@ -112,7 +81,7 @@ export function AdaptiveNavRail() {
                     style={{
                       background: 'linear-gradient(135deg, #2878FF 0%, #1D65E0 100%)',
                       borderRadius: '14px',
-                      boxShadow: '0 0 24px rgba(40, 120, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.2)',
+                      boxShadow: '0 0 20px rgba(40, 120, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
                       animation: 'fadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1)',
                     }}
                   />
@@ -120,15 +89,58 @@ export function AdaptiveNavRail() {
 
                 <Icon
                   size={20}
+                  strokeWidth={isActive ? 2.2 : 1.8}
                   className="relative z-10 pointer-events-none"
                   style={{
-                    color: isActive ? '#FFFFFF' : '#7B8BA5',
-                    transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    color: isActive ? '#FFFFFF' : '#10264A',
+                    transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
                   }}
                 />
               </button>
             );
           })}
+
+          {/* Settings at bottom */}
+          <div className="flex-1" />
+          <button
+            className="relative flex items-center justify-center"
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '14px',
+              transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
+            }}
+            title="Configuración"
+            aria-label="Configuración"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(40, 120, 255, 0.08)';
+              e.currentTarget.style.transform = 'scale(1.05)';
+              const icon = e.currentTarget.querySelector('svg');
+              if (icon) icon.style.color = '#2878FF';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.transform = 'scale(1)';
+              const icon = e.currentTarget.querySelector('svg');
+              if (icon) icon.style.color = '#10264A';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.95)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+          >
+            <Settings
+              size={20}
+              strokeWidth={1.8}
+              className="relative z-10 pointer-events-none"
+              style={{
+                color: '#10264A',
+                transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
+            />
+          </button>
         </nav>
       </div>
     </aside>

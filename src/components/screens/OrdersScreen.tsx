@@ -12,10 +12,10 @@ export function OrdersScreen() {
         {/* LEFT: Header */}
         <div className="lg:col-span-4 min-w-0">
           <div className="shrink-0">
-            <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#111A35' }}>
+            <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#10264A' }}>
               Órdenes
             </h1>
-            <p className="text-[13px] mt-0.5" style={{ color: '#3D4F6F' }}>
+            <p className="text-[13px] mt-0.5" style={{ color: '#7B8BA5' }}>
               Gestiona las órdenes de trabajo del laboratorio.
             </p>
           </div>

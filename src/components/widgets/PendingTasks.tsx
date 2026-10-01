@@ -21,20 +21,21 @@ export default function PendingTasks() {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div
-            className="w-6 h-6 rounded-lg flex items-center justify-center"
+            className="w-7 h-7 rounded-lg flex items-center justify-center"
             style={{ background: 'rgba(40, 120, 255, 0.1)' }}
           >
-            <FileText size={12} style={{ color: '#2878FF' }} />
+            <FileText size={14} style={{ color: '#2878FF' }} />
           </div>
-          <div>
-            <p className="text-[11px] font-semibold" style={{ color: '#111A35' }}>
-              Lista de tareas
-            </p>
-            <p className="text-[9px]" style={{ color: '#7B8BA5' }}>
-              Tus pendientes de hoy · {completedCount}/{totalCount}
-            </p>
-          </div>
+          <p className="text-[13px] font-bold" style={{ color: '#10264A' }}>
+            Lista de tareas
+          </p>
         </div>
+        <button
+          className="text-[11px] font-semibold transition-all duration-150 hover:underline"
+          style={{ color: '#2878FF' }}
+        >
+          Ver todas &gt;
+        </button>
         <button
           className="w-6 h-6 rounded-full flex items-center justify-center"
           style={{

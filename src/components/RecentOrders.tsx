@@ -45,14 +45,28 @@ export function RecentOrders() {
         {/* Header */}
         <div className="px-5 py-4 border-b border-gray-100">
           <div className="flex items-center justify-between">
-            <h3 className="text-[15px] font-bold" style={{ color: '#111A35' }}>
-              Órdenes Recientes
-            </h3>
+            <div className="flex items-center gap-2">
+              <div
+                className="w-7 h-7 rounded-lg flex items-center justify-center"
+                style={{ background: 'rgba(40, 120, 255, 0.1)' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2878FF" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                  <path d="M14 2v6h6" />
+                  <path d="M16 13H8" />
+                  <path d="M16 17H8" />
+                  <path d="M10 9H8" />
+                </svg>
+              </div>
+              <h3 className="text-[13px] font-bold" style={{ color: '#10264A' }}>
+                Órdenes recientes
+              </h3>
+            </div>
             <button
               className="text-[11px] font-semibold transition-all duration-150 hover:underline"
               style={{ color: '#2878FF' }}
             >
-              Ver todas
+              Ver todas &gt;
             </button>
           </div>
         </div>

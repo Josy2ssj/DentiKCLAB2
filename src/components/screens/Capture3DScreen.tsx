@@ -4,8 +4,8 @@ export function Capture3DScreen() {
   return (
     <div className="max-w-[1600px] mx-auto h-full flex flex-col">
       <div className="mb-6 shrink-0">
-        <h1 className="text-3xl font-bold text-slate-900">Captura 3D</h1>
-        <p className="text-sm text-slate-600 mt-1">Escaneo, visualización y exportación de modelos 3D.</p>
+        <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#10264A' }}>Captura 3D</h1>
+        <p className="text-[13px] mt-1" style={{ color: '#7B8BA5' }}>Escaneo, visualización y exportación de modelos 3D.</p>
       </div>
 
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm flex-1 min-h-0 flex flex-col items-center justify-center" data-workspace="capture3d">

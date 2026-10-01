@@ -33,7 +33,7 @@ export default function WorkTypes() {
           >
             <FlaskConical size={14} style={{ color: '#2878FF' }} />
           </div>
-          <h3 className="text-[13.5px] font-bold" style={{ color: '#111A35' }}>
+          <h3 className="text-[13px] font-bold" style={{ color: '#10264A' }}>
             Tipos de trabajos
           </h3>
         </div>

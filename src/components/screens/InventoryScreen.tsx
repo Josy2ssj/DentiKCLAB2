@@ -9,8 +9,8 @@ export function InventoryScreen() {
   return (
     <div className="max-w-[1600px] mx-auto">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-slate-900">Inventario</h1>
-        <p className="text-sm text-slate-600 mt-1">Control de materiales y stock del laboratorio.</p>
+        <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#10264A' }}>Inventario</h1>
+        <p className="text-[13px] mt-1" style={{ color: '#7B8BA5' }}>Control de materiales y stock del laboratorio.</p>
       </div>
 
       <div className="grid grid-cols-3 gap-4 mb-6">

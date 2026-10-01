@@ -12,7 +12,7 @@ export function TopHeader() {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
+    { id: 'home', label: 'Inicio' },
     { id: 'ordenes', label: 'Órdenes' },
     { id: 'horario', label: 'Horario' },
     { id: 'inventario', label: 'Inventario' },
@@ -132,14 +132,14 @@ export function TopHeader() {
   }, []);
 
   return (
-    <header className="relative z-20 px-6 py-4">
+    <header className="relative z-20 px-6 py-3">
       <div className="flex items-center justify-between">
         {/* LEFT: Brand */}
         <div className="flex items-baseline gap-1.5">
-          <span className="text-[17px] font-bold tracking-tight" style={{ color: '#111A35' }}>
+          <span className="text-[16px] font-bold tracking-tight" style={{ color: '#10264A' }}>
             DentiKC
           </span>
-          <span className="text-[11px] font-semibold tracking-wide uppercase" style={{ color: '#7B8BA5' }}>
+          <span className="text-[10px] font-semibold tracking-wide uppercase" style={{ color: '#7B8BA5' }}>
             LAB OS
           </span>
         </div>

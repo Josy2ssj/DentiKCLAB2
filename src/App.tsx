@@ -37,18 +37,18 @@ function AppContent() {
       {/* Atmospheric Background */}
       <div className="app-background" />
 
-      {/* App Shell */}
-      <div className="relative z-10 flex h-dvh">
-        {/* Adaptive Nav Rail */}
-        <AdaptiveNavRail />
+      {/* App Shell with translucent field */}
+      <div className="relative z-10 flex h-dvh p-4">
+        {/* Main Application Field */}
+        <div className="app-field flex-1 flex flex-col overflow-hidden">
+          {/* Adaptive Nav Rail */}
+          <AdaptiveNavRail />
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-h-dvh lg:pl-[72px]">
           {/* Top Header */}
           <TopHeader />
 
           {/* Page Content */}
-          <main className="flex-1 px-4 sm:px-6 lg:px-8 xl:px-10 py-6 min-h-0 overflow-hidden">
+          <main className="flex-1 px-6 sm:px-8 lg:px-10 xl:px-12 py-4 min-h-0 overflow-hidden">
             <div 
               key={activeSection}
               className="animate-fadeIn h-full"

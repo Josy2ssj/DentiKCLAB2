@@ -60,13 +60,26 @@ export default function QuickAccess() {
       }}
     >
       {/* Header */}
-      <div className="mb-3">
-        <h3 className="text-[13.5px] font-bold" style={{ color: '#111A35' }}>
-          Accesos rápidos
-        </h3>
-        <p className="text-[11px] mt-0.5" style={{ color: '#7B8BA5' }}>
-          Todo lo que necesitas, en un solo lugar.
-        </p>
+      <div className="flex items-start gap-2 mb-3">
+        <div
+          className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+          style={{ background: 'rgba(139, 92, 246, 0.1)' }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h3 className="text-[13px] font-bold" style={{ color: '#10264A' }}>
+            Accesos rápidos
+          </h3>
+          <p className="text-[10px] mt-0.5" style={{ color: '#7B8BA5' }}>
+            Todo lo que necesitas, en un solo lugar.
+          </p>
+        </div>
       </div>
 
       {/* 2x2 Grid */}
