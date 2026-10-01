@@ -48,10 +48,10 @@ function AppContent() {
           <TopHeader />
 
           {/* Page Content */}
-          <main className="flex-1 px-4 sm:px-6 lg:px-8 xl:px-10 py-6 min-h-0 overflow-auto">
+          <main className="flex-1 px-4 sm:px-6 lg:px-8 xl:px-10 py-6 min-h-0 overflow-hidden">
             <div 
               key={activeSection}
-              className="animate-fadeIn"
+              className="animate-fadeIn h-full"
               style={{
                 animation: 'fadeIn 200ms cubic-bezier(0.22, 1, 0.36, 1)',
               }}

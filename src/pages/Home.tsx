@@ -13,9 +13,21 @@ export function Home() {
   const dateStr = `${days[today.getDay()]}, ${today.getDate()} de ${months[today.getMonth()]}`;
 
   return (
-    <div className="max-w-[1600px] mx-auto h-full flex flex-col">
+    <div 
+      className="mx-auto h-full flex flex-col"
+      style={{ 
+        maxWidth: 'clamp(1200px, 90vw, 1800px)',
+        paddingBottom: 'clamp(16px, 3vh, 32px)',
+      }}
+    >
       {/* Context Area: Greeting + Notches */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5" style={{ isolation: 'isolate' }}>
+      <div 
+        className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative"
+        style={{ 
+          isolation: 'isolate',
+          marginBottom: 'clamp(12px, 2vh, 20px)',
+        }}
+      >
         {/* LEFT: Greeting only */}
         <div className="lg:col-span-4 min-w-0">
           <div className="shrink-0">
@@ -44,9 +56,10 @@ export function Home() {
 
       {/* Workspace Frame: White Surfaces */}
       <div
-        className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 flex-1 min-h-0 relative"
+        className="grid grid-cols-1 lg:grid-cols-12 flex-1 min-h-0 relative"
         style={{
           gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr)',
+          gap: 'clamp(12px, 2vh, 20px)',
           zIndex: 1,
         }}
       >
