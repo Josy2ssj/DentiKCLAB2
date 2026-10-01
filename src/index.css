@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+/* Atmospheric background */
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(ellipse at top left, rgba(219, 234, 254, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at top right, rgba(196, 181, 253, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(164, 228, 252, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(221, 214, 254, 0.3) 0%, transparent 50%),
+    linear-gradient(to bottom, #f0f9ff 0%, #ffffff 50%, #f0f9ff 100%);
+  pointer-events: none;
+}
+
+/* Micro-interaction animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkmark {
+  from {
+    stroke-dasharray: 0 100;
+  }
+  to {
+    stroke-dasharray: 100 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-slideInRight {
+  animation: slideInRight 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
