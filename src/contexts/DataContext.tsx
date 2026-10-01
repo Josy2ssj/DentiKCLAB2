@@ -126,19 +126,19 @@ const initialOrders: Order[] = [
 ];
 
 const initialPatients: Patient[] = [
-  { id: 'P-001', name: 'María González', lastOrder: '15 Ene 2024', orderCount: 3, color: '#3B82F6' },
-  { id: 'P-002', name: 'Juan Pérez', lastOrder: '10 Ene 2024', orderCount: 2, color: '#10B981' },
-  { id: 'P-003', name: 'Ana López', lastOrder: '08 Ene 2024', orderCount: 5, color: '#F59E0B' },
-  { id: 'P-004', name: 'Carlos Ruiz', lastOrder: '05 Ene 2024', orderCount: 1, color: '#8B5CF6' },
-  { id: 'P-005', name: 'Laura Martín', lastOrder: '03 Ene 2024', orderCount: 4, color: '#EC4899' },
-  { id: 'P-006', name: 'Pedro Gómez', lastOrder: '01 Ene 2024', orderCount: 2, color: '#06B6D4' }
+  { id: 'P-001', name: 'Roberto Sánchez', lastOrder: '17 Mar, 2025', orderCount: 3, color: '#2878FF' },
+  { id: 'P-002', name: 'María López', lastOrder: '17 Mar, 2025', orderCount: 2, color: '#10B981' },
+  { id: 'P-003', name: 'Carlos Mendoza', lastOrder: '16 Mar, 2025', orderCount: 4, color: '#F59E0B' },
+  { id: 'P-004', name: 'Ana Torres', lastOrder: '15 Mar, 2025', orderCount: 3, color: '#8B5CF6' },
+  { id: 'P-005', name: 'Laura Jiménez', lastOrder: '14 Mar, 2025', orderCount: 1, color: '#EF4444' },
+  { id: 'P-006', name: 'José Ramírez', lastOrder: '14 Mar, 2025', orderCount: 2, color: '#06B6D4' }
 ];
 
 const initialTasks: Task[] = [
-  { id: 1, title: 'Revisar impresiones 3D', subtitle: '5 archivos pendientes', time: '09:00', done: false, color: '#3B82F6' },
-  { id: 2, title: 'Validar modelos dentales', subtitle: 'ORD-003, ORD-004', time: '10:30', done: false, color: '#10B981' },
-  { id: 3, title: 'Enviar reporte semanal', subtitle: 'Pendiente de envío', time: '14:00', done: false, color: '#F59E0B' },
-  { id: 4, title: 'Actualizar inventario', subtitle: '3 materiales bajos', time: '16:00', done: false, color: '#8B5CF6' }
+  { id: 1, title: 'Revisar controles de calidad', subtitle: 'Trabajo pendiente', time: '09:00', done: true, color: '#10B981' },
+  { id: 2, title: 'Validar resultados pendientes', subtitle: '12 órdenes', time: '10:30', done: false, color: '#F59E0B' },
+  { id: 3, title: 'Preparar trabajos', subtitle: 'Laboratorio', time: '13:00', done: false, color: '#2878FF' },
+  { id: 4, title: 'Enviar reporte diario', subtitle: 'DentiKC', time: '16:00', done: false, color: '#8B5CF6' }
 ];
 
 const initialInventory: InventoryItem[] = [
