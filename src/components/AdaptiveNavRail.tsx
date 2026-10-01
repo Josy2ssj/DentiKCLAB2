@@ -6,8 +6,7 @@ const navItems = [
   { id: 'ordenes', label: 'Órdenes', icon: ClipboardList },
   { id: 'horario', label: 'Horario', icon: Calendar },
   { id: 'inventario', label: 'Inventario', icon: Package },
-  { id: 'captura3d', label: 'Captura 3D', icon: Box },
-  { id: 'settings', label: 'Ajustes', icon: Settings }
+  { id: 'captura3d', label: 'Captura 3D', icon: Box }
 ];
 
 export function AdaptiveNavRail() {

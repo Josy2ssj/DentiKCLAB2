@@ -31,20 +31,14 @@ export function Home() {
           </div>
         </div>
 
-        {/* CENTER: Pending Orders Notch + Task List */}
-        <div className="lg:col-span-4 min-w-0 min-h-0">
-          <StatusWidgetStack
-            notch={<OrderStatusNotch type="pending" compact />}
-            widget={<PendingTasks />}
-          />
+        {/* CENTER: Pending Orders Notch (backplate only) */}
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative">
+          <OrderStatusNotch type="pending" compact />
         </div>
 
-        {/* RIGHT: Weekly Delivered Notch + Smart Stack */}
-        <div className="lg:col-span-4 min-w-0 min-h-0">
-          <StatusWidgetStack
-            notch={<OrderStatusNotch type="weekly-delivered" compact />}
-            widget={<SmartStack />}
-          />
+        {/* RIGHT: Weekly Delivered Notch (backplate only) */}
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative">
+          <OrderStatusNotch type="weekly-delivered" compact />
         </div>
       </div>
 
