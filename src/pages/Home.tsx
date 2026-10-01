@@ -3,6 +3,8 @@ import PendingTasks from '../components/widgets/PendingTasks';
 import SmartStack from '../components/widgets/SmartStack';
 import WorkTypes from '../components/widgets/WorkTypes';
 import QuickAccess from '../components/widgets/QuickAccess';
+import OrderStatusNotch from '../components/OrderStatusNotch';
+import StatusWidgetStack from '../components/StatusWidgetStack';
 
 export function Home() {
   const today = new Date();
@@ -29,40 +31,20 @@ export function Home() {
           </div>
         </div>
 
-        {/* CENTER: Pending Orders Notch (placeholder) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
-          <div
-            className="bg-gradient-to-br from-yellow-300 to-orange-400 rounded-t-2xl p-4 shadow-lg"
-            style={{ height: '76px' }}
-          >
-            <div className="flex items-center justify-between h-full">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                  <span className="text-lg">⏳</span>
-                </div>
-                <span className="font-bold text-orange-900">Pendientes</span>
-                <span className="text-2xl font-extrabold text-orange-900">0</span>
-              </div>
-            </div>
-          </div>
+        {/* CENTER: Pending Orders Notch + Task List */}
+        <div className="lg:col-span-4 min-w-0 min-h-0">
+          <StatusWidgetStack
+            notch={<OrderStatusNotch type="pending" compact />}
+            widget={<PendingTasks />}
+          />
         </div>
 
-        {/* RIGHT: Weekly Delivered Notch (placeholder) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
-          <div
-            className="bg-gradient-to-br from-emerald-300 to-teal-500 rounded-t-2xl p-4 shadow-lg"
-            style={{ height: '76px' }}
-          >
-            <div className="flex items-center justify-between h-full">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                  <span className="text-lg">✓</span>
-                </div>
-                <span className="font-bold text-emerald-900">Entregadas esta semana</span>
-                <span className="text-2xl font-extrabold text-emerald-900">0</span>
-              </div>
-            </div>
-          </div>
+        {/* RIGHT: Weekly Delivered Notch + Smart Stack */}
+        <div className="lg:col-span-4 min-w-0 min-h-0">
+          <StatusWidgetStack
+            notch={<OrderStatusNotch type="weekly-delivered" compact />}
+            widget={<SmartStack />}
+          />
         </div>
       </div>
 

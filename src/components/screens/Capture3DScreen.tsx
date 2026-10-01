@@ -2,13 +2,13 @@ import { Box, Upload, FileText } from 'lucide-react';
 
 export function Capture3DScreen() {
   return (
-    <div className="max-w-[1600px] mx-auto">
-      <div className="mb-6">
+    <div className="max-w-[1600px] mx-auto h-full flex flex-col">
+      <div className="mb-6 shrink-0">
         <h1 className="text-3xl font-bold text-slate-900">Captura 3D</h1>
         <p className="text-sm text-slate-600 mt-1">Escaneo, visualización y exportación de modelos 3D.</p>
       </div>
 
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm flex flex-col items-center justify-center" style={{ minHeight: '500px' }}>
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm flex-1 min-h-0 flex flex-col items-center justify-center" data-workspace="capture3d">
         <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-4">
           <Box size={28} className="text-purple-600" />
         </div>

@@ -1,17 +1,39 @@
 import { useData } from '../../contexts/DataContext';
 import { Search, Plus } from 'lucide-react';
+import OrderStatusNotch from '../OrderStatusNotch';
 
 export function OrdersScreen() {
   const { orders } = useData();
 
   return (
-    <div className="max-w-[1600px] mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-slate-900">Órdenes</h1>
-        <p className="text-sm text-slate-600 mt-1">Gestiona las órdenes de trabajo del laboratorio.</p>
+    <div className="max-w-[1600px] mx-auto h-full flex flex-col">
+      {/* Context Area: Header + Notches */}
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative mb-4 lg:mb-5">
+        {/* LEFT: Header */}
+        <div className="lg:col-span-4 min-w-0">
+          <div className="shrink-0">
+            <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#111A35' }}>
+              Órdenes
+            </h1>
+            <p className="text-[13px] mt-0.5" style={{ color: '#3D4F6F' }}>
+              Gestiona las órdenes de trabajo del laboratorio.
+            </p>
+          </div>
+        </div>
+
+        {/* CENTER: Pending Orders Notch */}
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
+          <OrderStatusNotch type="pending" compact />
+        </div>
+
+        {/* RIGHT: Weekly Delivered Notch */}
+        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
+          <OrderStatusNotch type="weekly-delivered" compact />
+        </div>
       </div>
 
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm" data-workspace="orders-panel">
+      {/* Workspace Frame: Orders Panel */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 min-h-0" data-workspace="orders-panel">
         <div className="flex items-center gap-4 mb-6">
           <div className="flex gap-2">
             <button className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium">Todas</button>

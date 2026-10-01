@@ -55,7 +55,7 @@ function AppContent() {
       </div>
 
       <SettingsModal />
-      <LayoutDebugger />
+      {import.meta.env.DEV && <LayoutDebugger />}
     </div>
   );
 }
