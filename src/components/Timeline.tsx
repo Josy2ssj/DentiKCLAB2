@@ -170,16 +170,51 @@ export function Timeline() {
       </div>
 
       {/* Timeline Visualization */}
-      <div className="flex-1 px-5 py-6 overflow-x-auto">
-        <div className="relative min-w-full" style={{ minHeight: '300px' }}>
-          {/* Main Timeline Line */}
+      <div className="flex-1 px-5 py-6 overflow-x-auto flex flex-col">
+        <div className="relative min-w-full flex-1 flex flex-col" style={{ minHeight: '280px' }}>
+          {/* Date Labels Area (top) */}
+          <div className="relative h-16 mb-2">
+            {timelineDates.map((date, index) => {
+              const dateOrders = getOrdersByDate(date);
+              const hasOrders = dateOrders.length > 0;
+              
+              return hasOrders ? (
+                <div 
+                  key={index} 
+                  className="absolute flex flex-col items-center"
+                  style={{ 
+                    left: `${(index / timelineDates.length) * 100}%`,
+                    transform: 'translateX(-50%)',
+                  }}
+                >
+                  <span className="text-[10px] font-medium" style={{ color: '#7B8BA5' }}>
+                    {date.toLocaleDateString('es-ES', { weekday: 'short' })}
+                  </span>
+                  <span className="text-[12px] font-bold" style={{ color: '#10264A' }}>
+                    {date.getDate()}
+                  </span>
+                </div>
+              ) : null;
+            })}
+          </div>
+
+          {/* Main Timeline Line (middle-upper area) */}
           <div 
-            className="absolute left-0 right-0 top-1/2 h-[2px]"
-            style={{ background: 'linear-gradient(90deg, transparent 0%, #CBD5E1 10%, #CBD5E1 90%, transparent 100%)' }}
+            className="absolute left-0 right-0 h-[2px]"
+            style={{ 
+              top: '80px',
+              background: 'linear-gradient(90deg, transparent 0%, #CBD5E1 10%, #CBD5E1 90%, transparent 100%)' 
+            }}
           />
 
-          {/* Timeline Nodes */}
-          <div className="relative flex items-center justify-between h-full" style={{ minWidth: timeScale === 'week' ? '100%' : '1200px' }}>
+          {/* Timeline Nodes Container */}
+          <div 
+            className="relative flex items-start justify-between"
+            style={{ 
+              minWidth: timeScale === 'week' ? '100%' : '1200px',
+              marginTop: '56px',
+            }}
+          >
             {timelineDates.map((date, index) => {
               const dateOrders = getOrdersByDate(date);
               const hasOrders = dateOrders.length > 0;
@@ -187,32 +222,19 @@ export function Timeline() {
 
               return (
                 <div key={index} className="relative flex flex-col items-center" style={{ flex: '1 1 0' }}>
-                  {/* Date Label (only for dates with orders) */}
+                  {/* Order Nodes with Branching (below the line) */}
                   {hasOrders && (
-                    <div className="absolute -top-16 flex flex-col items-center">
-                      <span className="text-[10px] font-medium" style={{ color: '#7B8BA5' }}>
-                        {date.toLocaleDateString('es-ES', { weekday: 'short' })}
-                      </span>
-                      <span className="text-[12px] font-bold" style={{ color: '#10264A' }}>
-                        {date.getDate()}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Order Nodes with Branching */}
-                  {hasOrders && (
-                    <div className="absolute -top-2 flex flex-col items-center">
+                    <div className="flex flex-col items-center mb-3">
                       {/* Branch line */}
                       <div 
                         className="w-[2px] bg-gray-300"
                         style={{ 
-                          height: `${Math.min(dateOrders.length * 50, 150)}px`,
-                          marginBottom: '4px',
+                          height: `${Math.min(dateOrders.length * 48, 140)}px`,
                         }}
                       />
                       
                       {/* Order nodes */}
-                      <div className="flex flex-col gap-3 items-center">
+                      <div className="flex flex-col gap-2 items-center mt-2">
                         {dateOrders.slice(0, 3).map((order, orderIndex) => (
                           <TimelineOrderNode
                             key={order.id}
@@ -233,7 +255,7 @@ export function Timeline() {
                     </div>
                   )}
 
-                  {/* Timeline Dot */}
+                  {/* Timeline Dot (on the line) */}
                   <div
                     className="relative z-10 rounded-full transition-all duration-200"
                     style={{
@@ -247,7 +269,7 @@ export function Timeline() {
 
                   {/* Today Indicator */}
                   {isToday && (
-                    <div className="absolute top-4 text-[9px] font-bold" style={{ color: '#2878FF' }}>
+                    <div className="mt-2 text-[9px] font-bold" style={{ color: '#2878FF' }}>
                       HOY
                     </div>
                   )}

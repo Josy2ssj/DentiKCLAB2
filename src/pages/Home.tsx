@@ -19,28 +19,26 @@ export function Home() {
         className="grid grid-cols-1 lg:grid-cols-4 shrink-0"
         style={{
           gap: 'clamp(10px, 1.5vh, 16px)',
-          marginBottom: 'clamp(10px, 1.5vh, 16px)',
-          height: '32.6vh',
-          maxHeight: '280px',
+          marginBottom: 'clamp(16px, 2.5vh, 24px)',
         }}
       >
         {/* Task List */}
-        <div className="min-w-0 h-full">
+        <div className="min-w-0">
           <PendingTasks />
         </div>
 
         {/* Quick Access */}
-        <div className="min-w-0 h-full">
+        <div className="min-w-0">
           <QuickAccess />
         </div>
 
         {/* Work Types */}
-        <div className="min-w-0 h-full">
+        <div className="min-w-0">
           <WorkTypes />
         </div>
 
         {/* Music Widget */}
-        <div className="min-w-0 h-full">
+        <div className="min-w-0">
           <MusicWidget />
         </div>
       </div>

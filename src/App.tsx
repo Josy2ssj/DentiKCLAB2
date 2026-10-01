@@ -48,7 +48,7 @@ function AppContent() {
           <TopHeader />
 
           {/* Page Content */}
-          <main className="flex-1 px-6 sm:px-8 lg:px-10 xl:px-12 py-4 min-h-0 overflow-hidden">
+          <main className="flex-1 pl-24 pr-6 sm:pr-8 lg:pr-10 xl:pr-12 py-4 min-h-0 overflow-hidden">
             <div 
               key={activeSection}
               className="animate-fadeIn h-full"
