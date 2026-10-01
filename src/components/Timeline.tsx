@@ -222,36 +222,86 @@ export function Timeline() {
 
               return (
                 <div key={index} className="relative flex flex-col items-center" style={{ flex: '1 1 0' }}>
-                  {/* Order Nodes with Branching (below the line) */}
+                  {/* Order Nodes with Organic Branching (below the line) */}
                   {hasOrders && (
-                    <div className="flex flex-col items-center mb-3">
-                      {/* Branch line */}
-                      <div 
-                        className="w-[2px] bg-gray-300"
-                        style={{ 
-                          height: `${Math.min(dateOrders.length * 48, 140)}px`,
-                        }}
-                      />
+                    <div className="relative mb-3" style={{ width: '100%', minHeight: '160px' }}>
+                      {/* SVG Branches */}
+                      <svg 
+                        className="absolute inset-0 pointer-events-none" 
+                        style={{ width: '100%', height: '100%', overflow: 'visible' }}
+                      >
+                        {dateOrders.slice(0, 3).map((order, orderIndex) => {
+                          // Deterministic branch geometry based on order index
+                          const variants = [
+                            { stemLength: 40, offsetX: 0, curveDepth: 20, nodeY: 60 },
+                            { stemLength: 50, offsetX: -15, curveDepth: 30, nodeY: 80 },
+                            { stemLength: 45, offsetX: 15, curveDepth: 25, nodeY: 70 },
+                          ];
+                          const variant = variants[orderIndex % variants.length];
+                          
+                          // Calculate branch path with smooth curves
+                          const startX = 50; // Center of day column (percentage)
+                          const startY = 0; // Top of branch area
+                          const endX = startX + variant.offsetX;
+                          const endY = variant.nodeY;
+                          
+                          // Create smooth cubic bezier curve
+                          const control1X = startX;
+                          const control1Y = startY + variant.stemLength * 0.5;
+                          const control2X = endX;
+                          const control2Y = endY - variant.curveDepth;
+                          
+                          return (
+                            <path
+                              key={order.id}
+                              d={`M ${startX}% ${startY} C ${control1X}% ${control1Y}, ${control2X}% ${control2Y}, ${endX}% ${endY}`}
+                              fill="none"
+                              stroke="#CBD5E1"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              style={{ opacity: 0.6 }}
+                            />
+                          );
+                        })}
+                      </svg>
                       
-                      {/* Order nodes */}
-                      <div className="flex flex-col gap-2 items-center mt-2">
-                        {dateOrders.slice(0, 3).map((order, orderIndex) => (
-                          <TimelineOrderNode
+                      {/* Order nodes positioned along branches */}
+                      {dateOrders.slice(0, 3).map((order, orderIndex) => {
+                        const variants = [
+                          { offsetX: 0, nodeY: 60 },
+                          { offsetX: -15, nodeY: 80 },
+                          { offsetX: 15, nodeY: 70 },
+                        ];
+                        const variant = variants[orderIndex % variants.length];
+                        
+                        return (
+                          <div
                             key={order.id}
-                            order={order}
-                            onClick={() => setSelectedOrder(order)}
-                            delay={orderIndex * 50}
-                          />
-                        ))}
-                        {dateOrders.length > 3 && (
-                          <div 
-                            className="text-[10px] font-semibold px-2 py-1 rounded-full cursor-pointer transition-all duration-150 hover:scale-105"
-                            style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}
+                            className="absolute"
+                            style={{
+                              left: `calc(50% + ${variant.offsetX}px)`,
+                              top: `${variant.nodeY}px`,
+                              transform: 'translateX(-50%)',
+                            }}
                           >
-                            +{dateOrders.length - 3}
+                            <TimelineOrderNode
+                              order={order}
+                              onClick={() => setSelectedOrder(order)}
+                              delay={orderIndex * 50}
+                            />
                           </div>
-                        )}
-                      </div>
+                        );
+                      })}
+                      
+                      {/* Overflow indicator */}
+                      {dateOrders.length > 3 && (
+                        <div 
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-semibold px-2 py-1 rounded-full cursor-pointer transition-all duration-150 hover:scale-105"
+                          style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}
+                        >
+                          +{dateOrders.length - 3}
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -406,14 +456,14 @@ function TimelineOrderNode({ order, onClick, delay = 0 }: { order: Order; onClic
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Enhanced Glow Effect */}
+      {/* Enhanced Glow Effect - Subtle ambient light */}
       <div
         className="absolute inset-0 rounded-full transition-all duration-300"
         style={{
-          background: `radial-gradient(circle, ${statusColor.glow} 0%, transparent 70%)`,
-          opacity: isHovered ? 1 : 0.6,
-          transform: isHovered ? 'scale(2)' : 'scale(1.5)',
-          filter: 'blur(4px)',
+          background: `radial-gradient(circle, ${statusColor.glow} 0%, transparent 60%)`,
+          opacity: isHovered ? 0.8 : 0.4,
+          transform: isHovered ? 'scale(1.8)' : 'scale(1.4)',
+          filter: 'blur(6px)',
         }}
       />
 
@@ -423,18 +473,18 @@ function TimelineOrderNode({ order, onClick, delay = 0 }: { order: Order; onClic
         style={{
           background: 'white',
           boxShadow: isHovered 
-            ? `0 6px 20px ${statusColor.glow}, 0 0 0 3px ${statusColor.main}`
-            : `0 3px 12px rgba(17, 26, 53, 0.1)`,
-          transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-          border: `2px solid ${statusColor.main}20`,
+            ? `0 6px 20px ${statusColor.glow}, 0 0 0 2px ${statusColor.main}40`
+            : `0 3px 12px rgba(17, 26, 53, 0.08), 0 0 0 1px ${statusColor.main}20`,
+          transform: isHovered ? 'scale(1.08)' : 'scale(1)',
         }}
       >
-        {/* Status Indicator with Glow */}
+        {/* Status Indicator with Refined Glow */}
         <div
-          className="absolute -top-1 -right-1 w-4 h-4 rounded-full"
+          className="absolute -top-1 -right-1 w-4 h-4 rounded-full transition-all duration-200"
           style={{
             background: statusColor.main,
-            boxShadow: `0 0 0 2px white, 0 0 12px ${statusColor.glow}`,
+            boxShadow: `0 0 0 2px white, 0 0 10px ${statusColor.glow}, 0 0 20px ${statusColor.glow}`,
+            opacity: isHovered ? 1 : 0.85,
           }}
         />
 
