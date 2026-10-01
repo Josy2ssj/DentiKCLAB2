@@ -1,10 +1,9 @@
-import PatientList from '../components/widgets/PatientList';
 import PendingTasks from '../components/widgets/PendingTasks';
-import SmartStack from '../components/widgets/SmartStack';
-import WorkTypes from '../components/widgets/WorkTypes';
 import QuickAccess from '../components/widgets/QuickAccess';
-import OrderStatusNotch from '../components/OrderStatusNotch';
-import StatusWidgetStack from '../components/StatusWidgetStack';
+import WorkTypes from '../components/widgets/WorkTypes';
+import { MusicWidget } from '../components/widgets/MusicWidget';
+import { Timeline } from '../components/Timeline';
+import { RecentOrders } from '../components/RecentOrders';
 
 export function Home() {
   const today = new Date();
@@ -20,72 +19,70 @@ export function Home() {
         paddingBottom: 'clamp(16px, 3vh, 32px)',
       }}
     >
-      {/* Context Area: Greeting + Notches */}
+      {/* Context Area: Greeting */}
       <div 
-        className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-12 shrink-0 relative"
+        className="shrink-0 relative"
         style={{ 
-          isolation: 'isolate',
           marginBottom: 'clamp(12px, 2vh, 20px)',
         }}
       >
-        {/* LEFT: Greeting only */}
-        <div className="lg:col-span-4 min-w-0">
-          <div className="shrink-0">
-            <p className="text-[12px] font-medium mb-0.5" style={{ color: '#7B8BA5' }}>
-              {dateStr}
-            </p>
-            <h1 className="text-[24px] sm:text-[26px] lg:text-[28px] font-bold tracking-tight leading-tight" style={{ color: '#111A35' }}>
-              Hola, Josy!
-            </h1>
-            <p className="text-[12px] mt-0.5" style={{ color: '#3D4F6F' }}>
-              Aquí tienes un resumen general de tu laboratorio.
-            </p>
-          </div>
-        </div>
-
-        {/* CENTER: Pending Orders Notch (backplate only) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
-          <OrderStatusNotch type="pending" compact />
-        </div>
-
-        {/* RIGHT: Weekly Delivered Notch (backplate only) */}
-        <div className="lg:col-span-4 min-w-0 min-h-0 relative" style={{ zIndex: 0 }}>
-          <OrderStatusNotch type="weekly-delivered" compact />
+        <div>
+          <p className="text-[12px] font-medium mb-0.5" style={{ color: '#7B8BA5' }}>
+            {dateStr}
+          </p>
+          <h1 className="text-[24px] sm:text-[26px] lg:text-[28px] font-bold tracking-tight leading-tight" style={{ color: '#111A35' }}>
+            Hola, Josy!
+          </h1>
+          <p className="text-[12px] mt-0.5" style={{ color: '#3D4F6F' }}>
+            Centro operativo del laboratorio
+          </p>
         </div>
       </div>
 
-      {/* Workspace Frame: White Surfaces */}
+      {/* Top Widgets Row */}
       <div
-        className="grid grid-cols-1 lg:grid-cols-12 flex-1 min-h-0 relative"
+        className="grid grid-cols-1 lg:grid-cols-4 shrink-0"
         style={{
-          gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr)',
           gap: 'clamp(12px, 2vh, 20px)',
-          zIndex: 1,
+          marginBottom: 'clamp(12px, 2vh, 20px)',
         }}
       >
-        {/* LEFT: Patient List (full height) */}
-        <div className="lg:col-span-4 lg:row-span-2 min-w-0 flex flex-col">
-          <PatientList />
-        </div>
-
-        {/* CENTER TOP: Task List */}
-        <div className="lg:col-span-4 min-w-0 min-h-0">
+        {/* Task List */}
+        <div className="min-w-0" style={{ height: '280px' }}>
           <PendingTasks />
         </div>
 
-        {/* RIGHT TOP: Smart Stack */}
-        <div className="lg:col-span-4 min-w-0 min-h-0">
-          <SmartStack />
+        {/* Quick Access */}
+        <div className="min-w-0" style={{ height: '280px' }}>
+          <QuickAccess />
         </div>
 
-        {/* CENTER BOTTOM: Work Types */}
-        <div className="lg:col-span-4 min-w-0 min-h-0">
+        {/* Work Types */}
+        <div className="min-w-0" style={{ height: '280px' }}>
           <WorkTypes />
         </div>
 
-        {/* RIGHT BOTTOM: Quick Access */}
+        {/* Music Widget */}
+        <div className="min-w-0" style={{ height: '280px' }}>
+          <MusicWidget />
+        </div>
+      </div>
+
+      {/* Main Content: Timeline + Recent Orders */}
+      <div
+        className="grid grid-cols-1 lg:grid-cols-12 flex-1 min-h-0"
+        style={{
+          gap: 'clamp(12px, 2vh, 20px)',
+        }}
+      >
+        {/* Timeline (8 columns) */}
+        <div className="lg:col-span-8 min-w-0 min-h-0">
+          <Timeline />
+        </div>
+
+        {/* Recent Orders (4 columns) */}
         <div className="lg:col-span-4 min-w-0 min-h-0">
-          <QuickAccess />
+          <RecentOrders />
         </div>
       </div>
     </div>
