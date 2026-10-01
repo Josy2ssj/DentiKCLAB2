@@ -48,9 +48,9 @@ export function AdaptiveNavRail() {
             </filter>
           </defs>
 
-          {/* Organic shape with smooth curves */}
+          {/* Organic shape with smooth curves - 24px radius with cubic Bézier */}
           <path
-            d="M 0,0 L 48,0 C 60,0 72,12 72,24 L 72,536 C 72,548 60,560 48,560 L 0,560 Z"
+            d="M 0,0 L 48,0 C 62,0 72,10 72,24 L 72,536 C 72,550 62,560 48,560 L 0,560 Z"
             fill="url(#sidebarGrad)"
             filter="url(#softShadow)"
           />

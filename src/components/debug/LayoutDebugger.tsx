@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 
 export function LayoutDebugger() {
+  // Only render in development mode
+  if (!import.meta.env.DEV) {
+    return null;
+  }
+
   const [isVisible, setIsVisible] = useState(false);
   const [measurements, setMeasurements] = useState<any>({});
 

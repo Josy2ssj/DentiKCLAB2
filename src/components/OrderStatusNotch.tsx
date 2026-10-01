@@ -48,7 +48,7 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
         />
 
         {/* Content */}
-        <div className="relative h-full px-4 pt-3 pb-2 flex items-center justify-between" style={{ height: '76px' }}>
+        <div className="relative px-4 pt-3 pb-2 flex items-center justify-between" style={{ height: '76px' }}>
           <div className="flex items-center gap-2.5">
             <div
               className="w-8 h-8 rounded-xl flex items-center justify-center"
@@ -93,6 +93,16 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
             </button>
           </div>
         </div>
+
+        {/* Visual extension behind widget - 40px */}
+        <div
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{
+            top: '76px',
+            height: '40px',
+            background: 'linear-gradient(155deg, #FFE477 0%, #FFD052 40%, #F6B62E 100%)',
+          }}
+        />
       </div>
     );
   }
@@ -123,7 +133,7 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
       />
 
       {/* Content */}
-      <div className="relative h-full px-4 pt-3 pb-2 flex items-center justify-between" style={{ height: '76px' }}>
+      <div className="relative px-4 pt-3 pb-2 flex items-center justify-between" style={{ height: '76px' }}>
         <div className="flex items-center gap-2.5">
           <div
             className="w-8 h-8 rounded-xl flex items-center justify-center"
@@ -160,6 +170,16 @@ export default function OrderStatusNotch({ type, compact = false }: OrderStatusN
           <ChevronRight size={10} />
         </button>
       </div>
+
+      {/* Visual extension behind widget - 40px */}
+      <div
+        className="absolute left-0 right-0 pointer-events-none"
+        style={{
+          top: '76px',
+          height: '40px',
+          background: 'linear-gradient(155deg, #79E4C2 0%, #51D8B5 40%, #2EC5A5 100%)',
+        }}
+      />
     </div>
   );
 }

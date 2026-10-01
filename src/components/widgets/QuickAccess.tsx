@@ -49,12 +49,13 @@ export default function QuickAccess() {
 
   return (
     <div
-      className="h-full flex flex-col p-4"
+      className="h-full flex flex-col px-4 pt-4"
       style={{
         background: 'rgba(255, 255, 255, 0.88)',
         borderRadius: '22px',
         backdropFilter: 'blur(8px)',
         boxShadow: '0 8px 32px rgba(17, 26, 53, 0.05), 0 2px 8px rgba(17, 26, 53, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+        paddingBottom: '18px',
       }}
     >
       {/* Header */}
