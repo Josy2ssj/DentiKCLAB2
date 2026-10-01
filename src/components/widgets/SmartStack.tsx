@@ -10,9 +10,17 @@ const modules = [
 export default function SmartStack() {
   const [activeModule, setActiveModule] = useState(0);
   const [note, setNote] = useState('');
+  const [direction, setDirection] = useState<'left' | 'right'>('right');
 
-  const goNext = () => setActiveModule((prev) => (prev + 1) % modules.length);
-  const goPrev = () => setActiveModule((prev) => (prev - 1 + modules.length) % modules.length);
+  const goNext = () => {
+    setDirection('right');
+    setActiveModule((prev) => (prev + 1) % modules.length);
+  };
+  
+  const goPrev = () => {
+    setDirection('left');
+    setActiveModule((prev) => (prev - 1 + modules.length) % modules.length);
+  };
 
   return (
     <div
@@ -30,8 +38,23 @@ export default function SmartStack() {
           Centro de control
         </h3>
         <button
-          className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold transition-all duration-150 hover:bg-[#F1F5F9]"
-          style={{ color: '#3D4F6F' }}
+          className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold"
+          style={{ 
+            color: '#3D4F6F',
+            transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = '#F1F5F9';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = 'scale(0.95)';
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
         >
           Notas
         </button>
@@ -46,17 +69,34 @@ export default function SmartStack() {
             return (
               <button
                 key={mod.id}
-                onClick={() => setActiveModule(idx)}
-                className="flex items-center justify-center w-6 h-6 rounded-md transition-all duration-200"
+                onClick={() => {
+                  setDirection(idx > activeModule ? 'right' : 'left');
+                  setActiveModule(idx);
+                }}
+                className="flex items-center justify-center w-6 h-6 rounded-md"
                 style={{
                   background: isActive ? 'rgba(46, 197, 165, 0.15)' : 'transparent',
+                  transition: 'all 160ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
                 title={mod.label}
                 aria-label={mod.label}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'rgba(46, 197, 165, 0.08)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'transparent';
+                  }
+                }}
               >
                 <Icon
                   size={12}
-                  style={{ color: isActive ? '#064E3B' : '#7B8BA5' }}
+                  style={{ 
+                    color: isActive ? '#064E3B' : '#7B8BA5',
+                    transition: 'color 160ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  }}
                   strokeWidth={isActive ? 2.2 : 1.8}
                 />
               </button>
@@ -68,8 +108,21 @@ export default function SmartStack() {
         <div className="flex items-center gap-0.5">
           <button
             onClick={goPrev}
-            className="w-5 h-5 flex items-center justify-center rounded transition-all duration-150 hover:bg-[#F1F5F9] active:scale-95"
+            className="w-5 h-5 flex items-center justify-center rounded"
+            style={{ transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             aria-label="Anterior"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F1F5F9';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.9)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
             <ChevronLeft size={11} style={{ color: '#3D4F6F' }} />
           </button>
@@ -78,8 +131,21 @@ export default function SmartStack() {
           </span>
           <button
             onClick={goNext}
-            className="w-5 h-5 flex items-center justify-center rounded transition-all duration-150 hover:bg-[#F1F5F9] active:scale-95"
+            className="w-5 h-5 flex items-center justify-center rounded"
+            style={{ transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             aria-label="Siguiente"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F1F5F9';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.9)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
             <ChevronRight size={11} style={{ color: '#3D4F6F' }} />
           </button>
@@ -87,7 +153,11 @@ export default function SmartStack() {
       </div>
 
       {/* Content */}
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden">
+        <div 
+          key={activeModule}
+          className={direction === 'right' ? 'animate-slideInRight h-full' : 'animate-slideInLeft h-full'}
+        >
         {activeModule === 0 && (
           <div className="flex flex-col h-full">
             <div className="mb-2">
@@ -143,6 +213,7 @@ export default function SmartStack() {
             </p>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

@@ -159,7 +159,7 @@ export function TopHeader() {
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id as any)}
-                className="px-3.5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200"
+                className="px-3.5 py-1.5 rounded-full text-[13px] font-medium"
                 style={{
                   background: isActive
                     ? 'linear-gradient(135deg, #121A30 0%, #1C2942 100%)'
@@ -168,6 +168,27 @@ export function TopHeader() {
                   boxShadow: isActive
                     ? '0 2px 8px rgba(17, 26, 53, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
                     : 'none',
+                  transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.6)';
+                    e.currentTarget.style.color = '#111A35';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = '#3D4F6F';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }
+                }}
+                onMouseDown={(e) => {
+                  e.currentTarget.style.transform = 'scale(0.97)';
+                }}
+                onMouseUp={(e) => {
+                  e.currentTarget.style.transform = isActive ? 'translateY(0)' : 'translateY(-1px)';
                 }}
               >
                 {item.label}

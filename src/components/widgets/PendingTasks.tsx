@@ -35,14 +35,33 @@ export default function PendingTasks() {
           </div>
         </div>
         <button
-          className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-150 hover:scale-105 active:scale-95"
+          className="w-6 h-6 rounded-full flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, #2878FF 0%, #1D65E0 100%)',
             boxShadow: '0 2px 6px rgba(40, 120, 255, 0.25)',
+            transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
           }}
           aria-label="Agregar tarea"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.08)';
+            e.currentTarget.style.boxShadow = '0 3px 8px rgba(40, 120, 255, 0.35)';
+            const icon = e.currentTarget.querySelector('svg');
+            if (icon) icon.style.transform = 'rotate(8deg)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 2px 6px rgba(40, 120, 255, 0.25)';
+            const icon = e.currentTarget.querySelector('svg');
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = 'scale(0.93)';
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = 'scale(1.08)';
+          }}
         >
-          <Plus size={12} style={{ color: '#FFFFFF' }} />
+          <Plus size={12} style={{ color: '#FFFFFF', transition: 'transform 150ms cubic-bezier(0.22, 1, 0.36, 1)' }} />
         </button>
       </div>
 
@@ -52,14 +71,35 @@ export default function PendingTasks() {
           <button
             key={task.id}
             onClick={() => toggleTask(task.id)}
-            className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-150 hover:bg-[#F8FAFC] active:scale-[0.99] text-left w-full group"
+            className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-left w-full group"
+            style={{ transition: 'all 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F8FAFC';
+              const timePill = e.currentTarget.querySelector('.task-time');
+              if (timePill) (timePill as HTMLElement).style.background = '#E2E8F0';
+              const colorBar = e.currentTarget.querySelector('.task-color-bar');
+              if (colorBar) (colorBar as HTMLElement).style.opacity = '0.9';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              const timePill = e.currentTarget.querySelector('.task-time');
+              if (timePill) (timePill as HTMLElement).style.background = '#F1F5F9';
+              const colorBar = e.currentTarget.querySelector('.task-color-bar');
+              if (colorBar) (colorBar as HTMLElement).style.opacity = '0.6';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.99)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
             {/* Checkbox */}
-            <div className="shrink-0 transition-all duration-200">
+            <div className="shrink-0" style={{ transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
               {task.done ? (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="animate-fadeIn">
                   <circle cx="12" cy="12" r="10" fill={task.color} />
-                  <path d="M8 12l2.5 2.5L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M8 12l2.5 2.5L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'checkmark 300ms cubic-bezier(0.22, 1, 0.36, 1)' }} />
                 </svg>
               ) : (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -71,31 +111,32 @@ export default function PendingTasks() {
             {/* Task Info */}
             <div className="flex-1 min-w-0">
               <p
-                className="text-[11.5px] font-medium truncate transition-all duration-200"
+                className="text-[11.5px] font-medium truncate"
                 style={{
                   color: task.done ? '#7B8BA5' : '#111A35',
                   textDecoration: task.done ? 'line-through' : 'none',
+                  transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
               >
                 {task.title}
               </p>
-              <p className="text-[9.5px] transition-all duration-200" style={{ color: '#7B8BA5' }}>
+              <p className="text-[9.5px]" style={{ color: '#7B8BA5', transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
                 {task.subtitle}
               </p>
             </div>
 
             {/* Time */}
             <span
-              className="text-[9.5px] font-semibold px-1.5 py-0.5 rounded shrink-0"
-              style={{ background: '#F1F5F9', color: '#3D4F6F' }}
+              className="text-[9.5px] font-semibold px-1.5 py-0.5 rounded shrink-0 task-time"
+              style={{ background: '#F1F5F9', color: '#3D4F6F', transition: 'background 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             >
               {task.time}
             </span>
 
             {/* Color indicator */}
             <div
-              className="w-0.5 h-4 rounded-full shrink-0"
-              style={{ background: task.color, opacity: 0.6 }}
+              className="w-0.5 h-4 rounded-full shrink-0 task-color-bar"
+              style={{ background: task.color, opacity: 0.6, transition: 'opacity 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             />
           </button>
         ))}

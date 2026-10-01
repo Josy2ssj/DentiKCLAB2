@@ -73,23 +73,47 @@ export function AdaptiveNavRail() {
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id as any)}
-                className="relative flex items-center justify-center transition-all duration-200"
+                className="relative flex items-center justify-center"
                 style={{
                   width: '48px',
                   height: '48px',
                   borderRadius: '14px',
+                  transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
                 title={item.label}
                 aria-label={item.label}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.transform = 'scale(1.03)';
+                    const icon = e.currentTarget.querySelector('svg');
+                    if (icon) icon.style.color = '#E0E7FF';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.transform = 'scale(1)';
+                    const icon = e.currentTarget.querySelector('svg');
+                    if (icon) icon.style.color = '#7B8BA5';
+                  }
+                }}
+                onMouseDown={(e) => {
+                  e.currentTarget.style.transform = 'scale(0.95)';
+                }}
+                onMouseUp={(e) => {
+                  e.currentTarget.style.transform = isActive ? 'scale(1)' : 'scale(1.03)';
+                }}
               >
                 {/* Active background */}
                 {isActive && (
                   <div
-                    className="absolute inset-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none animate-fadeIn"
                     style={{
                       background: 'linear-gradient(135deg, #2878FF 0%, #1D65E0 100%)',
                       borderRadius: '14px',
                       boxShadow: '0 0 24px rgba(40, 120, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.2)',
+                      animation: 'fadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1)',
                     }}
                   />
                 )}
@@ -99,6 +123,7 @@ export function AdaptiveNavRail() {
                   className="relative z-10 pointer-events-none"
                   style={{
                     color: isActive ? '#FFFFFF' : '#7B8BA5',
+                    transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
                   }}
                 />
               </button>

@@ -45,8 +45,26 @@ export default function PatientList() {
 
       {/* Search */}
       <div className="relative flex items-center gap-2 mb-2.5">
-        <div className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ background: 'rgba(248, 250, 252, 0.9)' }}>
-          <Search size={13} style={{ color: '#7B8BA5' }} />
+        <div 
+          className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-xl" 
+          style={{ 
+            background: 'rgba(248, 250, 252, 0.9)',
+            transition: 'all 160ms cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
+            e.currentTarget.style.boxShadow = '0 0 0 2px rgba(40, 120, 255, 0.1)';
+            const icon = e.currentTarget.querySelector('svg');
+            if (icon) icon.style.color = '#2878FF';
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.background = 'rgba(248, 250, 252, 0.9)';
+            e.currentTarget.style.boxShadow = 'none';
+            const icon = e.currentTarget.querySelector('svg');
+            if (icon) icon.style.color = '#7B8BA5';
+          }}
+        >
+          <Search size={13} style={{ color: '#7B8BA5', transition: 'color 160ms cubic-bezier(0.22, 1, 0.36, 1)' }} />
           <input
             type="text"
             value={search}
@@ -57,9 +75,26 @@ export default function PatientList() {
           />
         </div>
         <button
-          className="flex items-center justify-center w-7 h-7 rounded-lg transition-all duration-150 hover:bg-gray-100"
-          style={{ background: 'rgba(248, 250, 252, 0.9)' }}
+          className="flex items-center justify-center w-7 h-7 rounded-lg"
+          style={{ 
+            background: 'rgba(248, 250, 252, 0.9)',
+            transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
           aria-label="Filtros"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(241, 245, 249, 1)';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(248, 250, 252, 0.9)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = 'scale(0.95)';
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
         >
           <SlidersHorizontal size={13} style={{ color: '#7B8BA5' }} />
         </button>
@@ -70,39 +105,67 @@ export default function PatientList() {
         {filteredPatients.map((patient) => (
           <button
             key={patient.id}
-            className="flex items-center gap-2.5 px-2.5 py-2 rounded-xl transition-all duration-150 hover:bg-[rgba(248,250,252,0.8)] group text-left w-full"
+            className="flex items-center gap-2.5 px-2.5 py-2 rounded-xl group text-left w-full"
+            style={{ transition: 'all 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(219, 234, 254, 0.3)';
+              const content = e.currentTarget.querySelector('.patient-content');
+              if (content) (content as HTMLElement).style.transform = 'translateX(2px)';
+              const avatar = e.currentTarget.querySelector('.patient-avatar');
+              if (avatar) (avatar as HTMLElement).style.filter = 'saturate(1.2) brightness(1.05)';
+              const count = e.currentTarget.querySelector('.patient-count');
+              if (count) (count as HTMLElement).style.color = '#3D4F6F';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              const content = e.currentTarget.querySelector('.patient-content');
+              if (content) (content as HTMLElement).style.transform = 'translateX(0)';
+              const avatar = e.currentTarget.querySelector('.patient-avatar');
+              if (avatar) (avatar as HTMLElement).style.filter = 'none';
+              const count = e.currentTarget.querySelector('.patient-count');
+              if (count) (count as HTMLElement).style.color = '#7B8BA5';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.995)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
-            {/* Avatar */}
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
-              style={{
-                background: `${patient.color}15`,
-                color: patient.color,
-              }}
-            >
-              {patient.name.split(' ').map(n => n[0]).join('')}
-            </div>
+            <div className="flex items-center gap-2.5 w-full patient-content" style={{ transition: 'transform 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
+              {/* Avatar */}
+              <div
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 patient-avatar"
+                style={{
+                  background: `${patient.color}15`,
+                  color: patient.color,
+                  transition: 'filter 160ms cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+              >
+                {patient.name.split(' ').map(n => n[0]).join('')}
+              </div>
 
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <p className="text-[12.5px] font-semibold truncate" style={{ color: '#111A35' }}>
-                {patient.name}
-              </p>
-              <p className="text-[10.5px] truncate" style={{ color: '#7B8BA5' }}>
-                Última orden: {patient.lastOrder}
-              </p>
-            </div>
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                <p className="text-[12.5px] font-semibold truncate" style={{ color: '#111A35' }}>
+                  {patient.name}
+                </p>
+                <p className="text-[10.5px] truncate" style={{ color: '#7B8BA5' }}>
+                  Última orden: {patient.lastOrder}
+                </p>
+              </div>
 
-            {/* Order count + chevron */}
-            <div className="flex items-center gap-1 shrink-0">
-              <span className="text-[11px] font-medium" style={{ color: '#7B8BA5' }}>
-                {patient.orderCount} {patient.orderCount === 1 ? 'orden' : 'órdenes'}
-              </span>
+              {/* Order count + chevron */}
+              <div className="flex items-center gap-1 shrink-0">
+                <span className="text-[11px] font-medium patient-count" style={{ color: '#7B8BA5', transition: 'color 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
+                  {patient.orderCount} {patient.orderCount === 1 ? 'orden' : 'órdenes'}
+                </span>
               <ChevronRight
                 size={13}
                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-150"
                 style={{ color: '#7B8BA5' }}
               />
+            </div>
             </div>
           </button>
         ))}
