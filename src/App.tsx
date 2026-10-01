@@ -4,11 +4,11 @@ import { WorkspaceFrameProvider } from './contexts/WorkspaceFrameContext';
 import { AdaptiveNavRail } from './components/AdaptiveNavRail';
 import { TopHeader } from './components/TopHeader';
 import { Home } from './pages/Home';
-import { OrdersScreen } from './pages/OrdersScreen';
-import { ScheduleScreen } from './pages/ScheduleScreen';
-import { InventoryScreen } from './pages/InventoryScreen';
-import { Capture3DScreen } from './pages/Capture3DScreen';
-import { SettingsModal } from './components/SettingsModal';
+import { OrdersScreen } from './components/screens/OrdersScreen';
+import { ScheduleScreen } from './components/screens/ScheduleScreen';
+import { InventoryScreen } from './components/screens/InventoryScreen';
+import { Capture3DScreen } from './components/screens/Capture3DScreen';
+import { SettingsModal } from './components/shared/SettingsModal';
 import { LayoutDebugger } from './components/debug/LayoutDebugger';
 import { useNavigation } from './contexts/NavigationContext';
 
@@ -19,13 +19,13 @@ function AppContent() {
     switch (activeSection) {
       case 'home':
         return <Home />;
-      case 'orders':
+      case 'ordenes':
         return <OrdersScreen />;
-      case 'schedule':
+      case 'horario':
         return <ScheduleScreen />;
-      case 'inventory':
+      case 'inventario':
         return <InventoryScreen />;
-      case 'capture3d':
+      case 'captura3d':
         return <Capture3DScreen />;
       default:
         return <Home />;
@@ -33,14 +33,27 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <AdaptiveNavRail />
-      <div className="lg:pl-20">
-        <TopHeader />
-        <main className="p-6">
-          {renderScreen()}
-        </main>
+    <div className="relative min-h-dvh w-full overflow-hidden">
+      {/* Atmospheric Background */}
+      <div className="app-background" />
+
+      {/* App Shell */}
+      <div className="relative z-10 flex h-dvh">
+        {/* Adaptive Nav Rail */}
+        <AdaptiveNavRail />
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-h-dvh lg:pl-[72px]">
+          {/* Top Header */}
+          <TopHeader />
+
+          {/* Page Content */}
+          <main className="flex-1 px-4 sm:px-6 lg:px-8 xl:px-10 py-6 min-h-0 overflow-auto">
+            {renderScreen()}
+          </main>
+        </div>
       </div>
+
       <SettingsModal />
       <LayoutDebugger />
     </div>
