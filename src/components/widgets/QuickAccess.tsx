@@ -7,9 +7,9 @@ const actions = [
     title: 'Nueva orden',
     description: 'Crear orden de trabajo',
     icon: Plus,
-    tint: 'rgba(219, 234, 254, 0.5)',
-    iconColor: '#2878FF',
-    iconBg: 'rgba(219, 234, 254, 0.7)',
+    tint: 'rgba(158, 203, 228, 0.2)',
+    iconColor: '#4A90E8',
+    iconBg: 'rgba(158, 203, 228, 0.3)',
     route: 'ordenes',
   },
   {
@@ -17,9 +17,9 @@ const actions = [
     title: 'Captura 3D',
     description: 'Escanear y exportar',
     icon: Box,
-    tint: 'rgba(238, 233, 255, 0.5)',
-    iconColor: '#8B5CF6',
-    iconBg: 'rgba(238, 233, 255, 0.7)',
+    tint: 'rgba(135, 191, 223, 0.2)',
+    iconColor: '#5A9FD4',
+    iconBg: 'rgba(135, 191, 223, 0.3)',
     route: 'captura3d',
   },
   {
@@ -27,9 +27,9 @@ const actions = [
     title: 'Pacientes',
     description: 'Gestionar pacientes',
     icon: Users,
-    tint: 'rgba(209, 250, 229, 0.45)',
-    iconColor: '#10B981',
-    iconBg: 'rgba(209, 250, 229, 0.7)',
+    tint: 'rgba(158, 203, 228, 0.2)',
+    iconColor: '#4A90E8',
+    iconBg: 'rgba(158, 203, 228, 0.3)',
     route: 'home',
   },
   {
@@ -37,9 +37,9 @@ const actions = [
     title: 'Inventario',
     description: 'Materiales y stock',
     icon: Package,
-    tint: 'rgba(254, 243, 199, 0.5)',
-    iconColor: '#F59E0B',
-    iconBg: 'rgba(254, 243, 199, 0.7)',
+    tint: 'rgba(135, 191, 223, 0.2)',
+    iconColor: '#5A9FD4',
+    iconBg: 'rgba(135, 191, 223, 0.3)',
     route: 'inventario',
   },
 ];
@@ -49,23 +49,37 @@ export default function QuickAccess() {
 
   return (
     <div
-      className="h-full flex flex-col px-4 pt-4"
+      className="h-full flex flex-col"
       style={{
         background: 'rgba(255, 255, 255, 0.88)',
         borderRadius: '22px',
         backdropFilter: 'blur(8px)',
         boxShadow: '0 8px 32px rgba(17, 26, 53, 0.05), 0 2px 8px rgba(17, 26, 53, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-        paddingBottom: '18px',
+        padding: 'clamp(12px, 2vh, 20px)',
+        paddingBottom: 'clamp(14px, 2.5vh, 22px)',
       }}
     >
       {/* Header */}
-      <div className="mb-3">
-        <h3 className="text-[13.5px] font-bold" style={{ color: '#111A35' }}>
-          Accesos rápidos
-        </h3>
-        <p className="text-[11px] mt-0.5" style={{ color: '#7B8BA5' }}>
-          Todo lo que necesitas, en un solo lugar.
-        </p>
+      <div className="flex items-start gap-2 mb-3">
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+          style={{ background: 'rgba(158, 203, 228, 0.3)' }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A90E8" strokeWidth="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h3 className="text-[13px] font-bold" style={{ color: '#2D5F8D' }}>
+            Accesos rápidos
+          </h3>
+          <p className="text-[10px] mt-0.5" style={{ color: '#6B8CA5' }}>
+            Todo lo que necesitas, en un solo lugar.
+          </p>
+        </div>
       </div>
 
       {/* 2x2 Grid */}
@@ -126,10 +140,10 @@ export default function QuickAccess() {
                   <ArrowUpRight size={10} style={{ color: action.iconColor }} className="group-hover:translate-x-0.5" />
                 </div>
               </div>
-              <p className="text-[11px] font-semibold mt-2" style={{ color: '#111A35' }}>
+              <p className="text-[11px] font-semibold mt-2" style={{ color: '#2D5F8D' }}>
                 {action.title}
               </p>
-              <p className="text-[9.5px] mt-0.5" style={{ color: '#7B8BA5' }}>
+              <p className="text-[9.5px] mt-0.5" style={{ color: '#6B8CA5' }}>
                 {action.description}
               </p>
             </button>

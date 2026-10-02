@@ -15,12 +15,13 @@ export default function PatientList() {
 
   return (
     <div
-      className="h-full flex flex-col p-4 relative overflow-hidden"
+      className="h-full flex flex-col relative overflow-hidden"
       style={{
         background: 'rgba(255, 255, 255, 0.85)',
         borderRadius: '24px',
         backdropFilter: 'blur(12px)',
         boxShadow: '0 8px 32px rgba(17, 26, 53, 0.05), 0 2px 8px rgba(17, 26, 53, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+        padding: 'clamp(12px, 2vh, 20px)',
       }}
     >
       {/* Segmented Control */}

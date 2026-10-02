@@ -12,7 +12,7 @@ export function TopHeader() {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
+    { id: 'home', label: 'Inicio' },
     { id: 'ordenes', label: 'Órdenes' },
     { id: 'horario', label: 'Horario' },
     { id: 'inventario', label: 'Inventario' },
@@ -132,14 +132,14 @@ export function TopHeader() {
   }, []);
 
   return (
-    <header className="relative z-20 px-6 py-4">
+    <header className="relative z-20 px-6 py-3">
       <div className="flex items-center justify-between">
         {/* LEFT: Brand */}
         <div className="flex items-baseline gap-1.5">
-          <span className="text-[17px] font-bold tracking-tight" style={{ color: '#111A35' }}>
+          <span className="text-[16px] font-bold tracking-tight" style={{ color: '#2D5F8D' }}>
             DentiKC
           </span>
-          <span className="text-[11px] font-semibold tracking-wide uppercase" style={{ color: '#7B8BA5' }}>
+          <span className="text-[10px] font-semibold tracking-wide uppercase" style={{ color: '#6B8CA5' }}>
             LAB OS
           </span>
         </div>
@@ -148,9 +148,10 @@ export function TopHeader() {
         <nav
           className="flex items-center gap-0.5 p-1 rounded-full"
           style={{
-            background: 'rgba(255, 255, 255, 0.7)',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 2px 12px rgba(17, 26, 53, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 2px 16px rgba(74, 144, 232, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+            border: '1px solid rgba(220, 236, 246, 0.6)',
           }}
         >
           {navItems.map((item) => {
@@ -159,28 +160,28 @@ export function TopHeader() {
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id as any)}
-                className="px-3.5 py-1.5 rounded-full text-[13px] font-medium"
+                className="px-3.5 py-1.5 rounded-full text-[13px] font-medium flex items-center gap-1.5"
                 style={{
                   background: isActive
-                    ? 'linear-gradient(135deg, #121A30 0%, #1C2942 100%)'
+                    ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)'
                     : 'transparent',
-                  color: isActive ? '#FFFFFF' : '#3D4F6F',
+                  color: isActive ? '#FFFFFF' : '#5A7A94',
                   boxShadow: isActive
-                    ? '0 2px 8px rgba(17, 26, 53, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                    ? '0 2px 8px rgba(74, 144, 232, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
                     : 'none',
                   transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.6)';
-                    e.currentTarget.style.color = '#111A35';
+                    e.currentTarget.style.background = 'rgba(220, 236, 246, 0.5)';
+                    e.currentTarget.style.color = '#2D5F8D';
                     e.currentTarget.style.transform = 'translateY(-1px)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = '#3D4F6F';
+                    e.currentTarget.style.color = '#5A7A94';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }
                 }}

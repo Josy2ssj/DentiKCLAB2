@@ -24,12 +24,13 @@ export default function SmartStack() {
 
   return (
     <div
-      className="h-full flex flex-col p-4"
+      className="h-full flex flex-col"
       style={{
         background: 'rgba(255, 255, 255, 0.94)',
         borderRadius: '24px',
         backdropFilter: 'blur(8px)',
         boxShadow: '0 8px 32px rgba(17, 26, 53, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+        padding: 'clamp(12px, 2vh, 20px)',
       }}
     >
       {/* Header */}
