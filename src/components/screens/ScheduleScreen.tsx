@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, X, Calendar, Clock, Users, Download, FileText } from 'lucide-react';
 
 interface Shift {
   id: string;
@@ -15,10 +15,10 @@ const staff = [
 ];
 
 const shiftColors = {
-  matutino: { bg: 'rgba(74, 144, 232, 0.15)', text: '#4A90E8', border: '#4A90E8' },
-  vespertino: { bg: 'rgba(16, 185, 129, 0.15)', text: '#10B981', border: '#10B981' },
-  extra: { bg: 'rgba(245, 158, 11, 0.15)', text: '#F59E0B', border: '#F59E0B' },
-  libre: { bg: 'rgba(139, 92, 246, 0.15)', text: '#8B5CF6', border: '#8B5CF6' }
+  matutino: { bg: 'rgba(74, 144, 232, 0.15)', text: '#4A90E8', border: '#4A90E8', label: 'Turno Matutino', time: '08:00 – 14:00' },
+  vespertino: { bg: 'rgba(16, 185, 129, 0.15)', text: '#10B981', border: '#10B981', label: 'Turno Vespertino', time: '14:00 – 20:00' },
+  extra: { bg: 'rgba(245, 158, 11, 0.15)', text: '#F59E0B', border: '#F59E0B', label: 'Turno Extra', time: '20:00 – 02:00' },
+  libre: { bg: 'rgba(139, 92, 246, 0.15)', text: '#8B5CF6', border: '#8B5CF6', label: 'Día libre', time: '' }
 };
 
 export function ScheduleScreen() {
@@ -110,164 +110,254 @@ export function ScheduleScreen() {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto h-full flex flex-col">
+    <div className="h-full flex flex-col" style={{ padding: 'clamp(16px, 3vh, 32px)' }}>
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-[26px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight" style={{ color: '#10264A' }}>
+      <div className="shrink-0 mb-6">
+        <h1 className="text-[32px] font-bold tracking-tight" style={{ color: '#081B40' }}>
           Horario
         </h1>
-        <p className="text-[13px] mt-1" style={{ color: '#7B8BA5' }}>
+        <p className="text-[14px] mt-1" style={{ color: '#6B8CA5' }}>
           Gestiona los turnos del equipo.
         </p>
       </div>
 
-      {/* Main Panel */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 min-h-0 flex flex-col" data-workspace="schedule-panel">
-        {/* Navigation */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
+      {/* Main Workspace */}
+      <div className="flex-1 min-h-0 flex gap-6">
+        {/* Left: Calendar */}
+        <div className="flex-1 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col min-w-0">
+          {/* Navigation */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => navigateMonth('prev')}
+                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+              >
+                <ChevronLeft size={20} style={{ color: '#4A6B8A' }} />
+              </button>
+              <h2 className="text-[20px] font-bold min-w-[200px] text-center" style={{ color: '#081B40' }}>
+                {currentDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
+              </h2>
+              <button
+                onClick={() => navigateMonth('next')}
+                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+              >
+                <ChevronRight size={20} style={{ color: '#4A6B8A' }} />
+              </button>
+            </div>
             <button
-              onClick={() => navigateMonth('prev')}
-              className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+              onClick={() => setCurrentDate(new Date())}
+              className="px-5 py-2 rounded-full text-[13px] font-semibold transition-all hover:shadow-lg"
+              style={{
+                background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 2px 8px rgba(74, 144, 232, 0.3)',
+              }}
             >
-              <ChevronLeft size={20} className="text-slate-600" />
-            </button>
-            <h2 className="text-xl font-bold text-slate-900 min-w-[200px] text-center">
-              {currentDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
-            </h2>
-            <button
-              onClick={() => navigateMonth('next')}
-              className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
-            >
-              <ChevronRight size={20} className="text-slate-600" />
+              Hoy
             </button>
           </div>
-          <button
-            onClick={() => setCurrentDate(new Date())}
-            className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
-          >
-            Hoy
-          </button>
-        </div>
 
-        {/* Calendar Grid */}
-        <div className="flex-1 flex flex-col">
-          {/* Day Names */}
-          <div className="grid grid-cols-7 gap-2 mb-2">
-            {dayNames.map(day => (
-              <div key={day} className="text-center py-2">
-                <span className="text-xs font-semibold text-slate-500 uppercase">{day}</span>
-              </div>
-            ))}
-          </div>
+          {/* Calendar Grid */}
+          <div className="flex-1 flex flex-col">
+            {/* Day Names */}
+            <div className="grid grid-cols-7 gap-2 mb-2">
+              {dayNames.map(day => (
+                <div key={day} className="text-center py-2">
+                  <span className="text-[11px] font-semibold uppercase" style={{ color: '#6B8CA5' }}>{day}</span>
+                </div>
+              ))}
+            </div>
 
-          {/* Days Grid */}
-          <div className="grid grid-cols-7 gap-2 flex-1">
-            {daysInMonth.map((date, index) => {
-              const dayShifts = getShiftsForDay(date);
-              const isCurrent = isCurrentMonth(date);
-              const isTodayDate = isToday(date);
+            {/* Days Grid */}
+            <div className="grid grid-cols-7 gap-2 flex-1">
+              {daysInMonth.map((date, index) => {
+                const dayShifts = getShiftsForDay(date);
+                const isCurrent = isCurrentMonth(date);
+                const isTodayDate = isToday(date);
 
-              return (
-                <div
-                  key={index}
-                  onClick={() => handleDayClick(date)}
-                  className={`relative p-2 rounded-xl border-2 transition-all ${
-                    isCurrent 
-                      ? isTodayDate
-                        ? 'border-blue-400 bg-blue-50 cursor-pointer hover:shadow-md'
-                        : 'border-slate-200 bg-white cursor-pointer hover:border-blue-300 hover:shadow-sm'
-                      : 'border-transparent bg-slate-50 cursor-default opacity-50'
-                  }`}
-                  style={{ minHeight: '100px' }}
-                >
-                  {/* Day Number */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`text-sm font-bold ${
-                      isTodayDate ? 'text-blue-600' : isCurrent ? 'text-slate-900' : 'text-slate-400'
-                    }`}>
-                      {date.getDate()}
-                    </span>
-                    {isTodayDate && (
-                      <span className="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">
-                        Hoy
+                return (
+                  <div
+                    key={index}
+                    onClick={() => handleDayClick(date)}
+                    className={`relative p-2 rounded-xl border-2 transition-all ${
+                      isCurrent 
+                        ? isTodayDate
+                          ? 'cursor-pointer hover:shadow-md'
+                          : 'cursor-pointer hover:shadow-sm'
+                        : 'cursor-default opacity-50'
+                    }`}
+                    style={{
+                      minHeight: '100px',
+                      borderColor: isTodayDate ? '#4A90E8' : isCurrent ? 'rgba(220, 236, 246, 0.6)' : 'transparent',
+                      background: isTodayDate ? 'rgba(74, 144, 232, 0.05)' : isCurrent ? 'rgba(255, 255, 255, 0.9)' : 'rgba(248, 250, 252, 0.5)',
+                    }}
+                  >
+                    {/* Day Number */}
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[14px] font-bold" style={{
+                        color: isTodayDate ? '#4A90E8' : isCurrent ? '#081B40' : '#9EC5E0'
+                      }}>
+                        {date.getDate()}
                       </span>
+                      {isTodayDate && (
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{
+                          background: 'rgba(74, 144, 232, 0.1)',
+                          color: '#4A90E8',
+                        }}>
+                          Hoy
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Shifts */}
+                    {isCurrent && dayShifts.length > 0 && (
+                      <div className="space-y-1">
+                        {dayShifts.map(shift => {
+                          const person = staff.find(s => s.id === shift.personId);
+                          const colors = shiftColors[shift.type];
+                          return (
+                            <div
+                              key={shift.id}
+                              className="flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium"
+                              style={{ 
+                                backgroundColor: colors.bg, 
+                                color: colors.text,
+                                borderLeft: `3px solid ${colors.border}`
+                              }}
+                            >
+                              <div 
+                                className="w-4 h-4 rounded-full flex items-center justify-center text-white text-[9px] font-bold"
+                                style={{ backgroundColor: person?.color }}
+                              >
+                                {person?.name[0]}
+                              </div>
+                              <span className="flex-1 truncate">
+                                {shift.type === 'matutino' ? 'Mat' : 
+                                 shift.type === 'vespertino' ? 'Ves' : 
+                                 shift.type === 'extra' ? 'Extra' : 'Libre'}
+                              </span>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleRemoveShift(shift.id);
+                                }}
+                                className="w-4 h-4 rounded-full flex items-center justify-center hover:bg-white/50 transition-all"
+                              >
+                                <X size={10} />
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Add Button */}
+                    {isCurrent && dayShifts.length === 0 && (
+                      <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center transition-all"
+                          style={{
+                            background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
+                          }}
+                        >
+                          <Plus size={14} className="text-white" />
+                        </div>
+                      </div>
                     )}
                   </div>
-
-                  {/* Shifts */}
-                  {isCurrent && dayShifts.length > 0 && (
-                    <div className="space-y-1">
-                      {dayShifts.map(shift => {
-                        const person = staff.find(s => s.id === shift.personId);
-                        const colors = shiftColors[shift.type];
-                        return (
-                          <div
-                            key={shift.id}
-                            className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium"
-                            style={{ 
-                              backgroundColor: colors.bg, 
-                              color: colors.text,
-                              borderLeft: `3px solid ${colors.border}`
-                            }}
-                          >
-                            <div 
-                              className="w-4 h-4 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
-                              style={{ backgroundColor: person?.color }}
-                            >
-                              {person?.name[0]}
-                            </div>
-                            <span className="flex-1 truncate">
-                              {shift.type === 'matutino' ? 'Mat' : 
-                               shift.type === 'vespertino' ? 'Ves' : 
-                               shift.type === 'extra' ? 'Extra' : 'Libre'}
-                            </span>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleRemoveShift(shift.id);
-                              }}
-                              className="w-4 h-4 rounded-full flex items-center justify-center hover:bg-white/50 transition-all"
-                            >
-                              <X size={10} />
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {/* Add Button */}
-                  {isCurrent && dayShifts.length === 0 && (
-                    <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-600 transition-all">
-                        <Plus size={14} className="text-white" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Legend */}
-        <div className="mt-6 pt-6 border-t border-slate-100">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">Simbología</h3>
-          <div className="flex gap-4 flex-wrap">
-            {Object.entries(shiftColors).map(([type, colors]) => (
-              <div key={type} className="flex items-center gap-2">
-                <div 
-                  className="w-4 h-4 rounded"
-                  style={{ backgroundColor: colors.bg, borderLeft: `3px solid ${colors.border}` }}
-                />
-                <span className="text-xs font-medium text-slate-600 capitalize">
-                  {type === 'matutino' ? 'Turno Matutino' : 
-                   type === 'vespertino' ? 'Turno Vespertino' : 
-                   type === 'extra' ? 'Turno Extra' : 'Día Libre'}
-                </span>
-              </div>
-            ))}
+        {/* Right: Tools Panel */}
+        <div className="w-80 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col">
+          {/* Simbología */}
+          <div className="mb-6">
+            <h3 className="text-[14px] font-bold mb-4" style={{ color: '#081B40' }}>Simbología</h3>
+            <div className="space-y-3">
+              {Object.entries(shiftColors).map(([type, colors]) => (
+                <div key={type} className="flex items-center gap-3">
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: colors.bg, borderLeft: `3px solid ${colors.border}` }}
+                  >
+                    <Clock size={14} style={{ color: colors.text }} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-[12px] font-semibold" style={{ color: colors.text }}>
+                      {colors.label}
+                    </div>
+                    {colors.time && (
+                      <div className="text-[10px]" style={{ color: '#6B8CA5' }}>
+                        {colors.time}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-slate-100 my-6"></div>
+
+          {/* Herramientas */}
+          <div className="flex-1">
+            <h3 className="text-[14px] font-bold mb-4" style={{ color: '#081B40' }}>Herramientas</h3>
+            <div className="space-y-2">
+              <button 
+                onClick={() => setShowAssignModal(true)}
+                className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all hover:shadow-md"
+                style={{
+                  background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
+                  color: '#FFFFFF',
+                }}
+              >
+                <Plus size={16} />
+                <span className="text-[12px] font-semibold">Asignar turno</span>
+              </button>
+
+              <button className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all hover:shadow-sm"
+                style={{
+                  background: 'rgba(248, 250, 252, 0.9)',
+                  color: '#4A6B8A',
+                }}
+              >
+                <Users size={16} />
+                <span className="text-[12px] font-semibold">Asignación múltiple</span>
+              </button>
+
+              <button className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all hover:shadow-sm"
+                style={{
+                  background: 'rgba(248, 250, 252, 0.9)',
+                  color: '#4A6B8A',
+                }}
+              >
+                <Calendar size={16} />
+                <span className="text-[12px] font-semibold">Intercambiar turnos</span>
+              </button>
+
+              <button className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all hover:shadow-sm"
+                style={{
+                  background: 'rgba(248, 250, 252, 0.9)',
+                  color: '#4A6B8A',
+                }}
+              >
+                <FileText size={16} />
+                <span className="text-[12px] font-semibold">Plantillas de horarios</span>
+              </button>
+
+              <button className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all hover:shadow-sm"
+                style={{
+                  background: 'rgba(248, 250, 252, 0.9)',
+                  color: '#4A6B8A',
+                }}
+              >
+                <Download size={16} />
+                <span className="text-[12px] font-semibold">Exportar calendario</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -319,14 +409,14 @@ function AssignShiftModal({
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-100">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Asignar Turno</h2>
-            <p className="text-sm text-slate-500 mt-1 capitalize">{formattedDate}</p>
+            <h2 className="text-[18px] font-bold" style={{ color: '#081B40' }}>Asignar Turno</h2>
+            <p className="text-[12px] mt-1 capitalize" style={{ color: '#6B8CA5' }}>{formattedDate}</p>
           </div>
           <button 
             onClick={onClose}
             className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
           >
-            <X size={18} className="text-slate-500" />
+            <X size={18} style={{ color: '#6B8CA5' }} />
           </button>
         </div>
 
@@ -334,7 +424,7 @@ function AssignShiftModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Person Selection */}
           <div>
-            <label className="text-sm font-medium text-slate-700 mb-2 block">Persona</label>
+            <label className="text-[12px] font-semibold mb-2 block" style={{ color: '#4A6B8A' }}>Persona</label>
             <div className="grid grid-cols-2 gap-2">
               {staff.map(person => (
                 <button
@@ -343,17 +433,21 @@ function AssignShiftModal({
                   onClick={() => setSelectedPerson(person.id)}
                   className={`flex items-center gap-2 p-3 rounded-xl border-2 transition-all ${
                     selectedPerson === person.id 
-                      ? 'border-blue-500 bg-blue-50' 
-                      : 'border-slate-200 hover:border-slate-300'
+                      ? '' 
+                      : 'hover:border-slate-300'
                   }`}
+                  style={{
+                    borderColor: selectedPerson === person.id ? '#4A90E8' : 'rgba(220, 236, 246, 0.6)',
+                    background: selectedPerson === person.id ? 'rgba(74, 144, 232, 0.05)' : 'white',
+                  }}
                 >
                   <div 
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[12px] font-bold"
                     style={{ backgroundColor: person.color }}
                   >
                     {person.name[0]}
                   </div>
-                  <span className="text-sm font-medium text-slate-900">{person.name}</span>
+                  <span className="text-[13px] font-medium" style={{ color: '#081B40' }}>{person.name}</span>
                 </button>
               ))}
             </div>
@@ -361,7 +455,7 @@ function AssignShiftModal({
 
           {/* Shift Type */}
           <div>
-            <label className="text-sm font-medium text-slate-700 mb-2 block">Tipo de Turno</label>
+            <label className="text-[12px] font-semibold mb-2 block" style={{ color: '#4A6B8A' }}>Tipo de Turno</label>
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(shiftColors).map(([type, colors]) => (
                 <button
@@ -370,14 +464,15 @@ function AssignShiftModal({
                   onClick={() => setSelectedType(type as Shift['type'])}
                   className={`p-3 rounded-xl border-2 transition-all ${
                     selectedType === type 
-                      ? 'border-blue-500' 
-                      : 'border-slate-200 hover:border-slate-300'
+                      ? '' 
+                      : 'hover:border-slate-300'
                   }`}
                   style={{ 
+                    borderColor: selectedType === type ? colors.border : 'rgba(220, 236, 246, 0.6)',
                     backgroundColor: selectedType === type ? colors.bg : 'white'
                   }}
                 >
-                  <span className="text-sm font-medium capitalize" style={{ color: colors.text }}>
+                  <span className="text-[12px] font-medium capitalize" style={{ color: colors.text }}>
                     {type === 'matutino' ? 'Matutino' : 
                      type === 'vespertino' ? 'Vespertino' : 
                      type === 'extra' ? 'Extra' : 'Libre'}
@@ -389,11 +484,16 @@ function AssignShiftModal({
 
           {/* Notes */}
           <div>
-            <label className="text-sm font-medium text-slate-700 mb-2 block">Notas (opcional)</label>
+            <label className="text-[12px] font-semibold mb-2 block" style={{ color: '#4A6B8A' }}>Notas (opcional)</label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-100 rounded-lg border-0 focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-4 py-2.5 rounded-xl text-[13px] transition-all resize-none"
+              style={{
+                background: 'rgba(248, 250, 252, 0.9)',
+                border: '1px solid rgba(220, 236, 246, 0.6)',
+                color: '#081B40',
+              }}
               rows={3}
               placeholder="Notas adicionales..."
             />
@@ -405,14 +505,23 @@ function AssignShiftModal({
           <button 
             type="button"
             onClick={onClose}
-            className="flex-1 px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-all"
+            className="flex-1 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all hover:shadow-md"
+            style={{
+              background: 'rgba(248, 250, 252, 0.9)',
+              color: '#4A6B8A',
+            }}
           >
             Cancelar
           </button>
           <button 
             type="submit"
             onClick={handleSubmit}
-            className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
+            className="flex-1 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all hover:shadow-lg"
+            style={{
+              background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
+              color: '#FFFFFF',
+              boxShadow: '0 2px 8px rgba(74, 144, 232, 0.3)',
+            }}
           >
             Asignar Turno
           </button>
