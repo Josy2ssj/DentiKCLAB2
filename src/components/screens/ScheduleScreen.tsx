@@ -110,44 +110,48 @@ export function ScheduleScreen() {
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ padding: 'clamp(16px, 3vh, 32px)' }}>
+    <div className="h-full flex flex-col" style={{ padding: 'var(--page-gap)' }}>
       {/* Header */}
-      <div className="shrink-0 mb-6">
-        <h1 className="text-[32px] font-bold tracking-tight" style={{ color: '#081B40' }}>
+      <div className="shrink-0 mb-4">
+        <h1 className="font-bold tracking-tight" style={{ color: '#081B40', fontSize: 'var(--page-title)', lineHeight: '1.2' }}>
           Horario
         </h1>
-        <p className="text-[14px] mt-1" style={{ color: '#6B8CA5' }}>
+        <p className="mt-1" style={{ color: '#6B8CA5', fontSize: 'var(--page-subtitle)' }}>
           Gestiona los turnos del equipo.
         </p>
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-1 min-h-0 flex gap-6">
+      <div className="flex-1 min-h-0 flex gap-4">
         {/* Left: Calendar */}
-        <div className="flex-1 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col min-w-0">
+        <div className="flex-1 bg-white/90 backdrop-blur-sm shadow-sm flex flex-col min-w-0" style={{ borderRadius: 'var(--card-radius)', padding: 'var(--panel-padding)' }}>
           {/* Navigation */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <button
                 onClick={() => navigateMonth('prev')}
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                className="rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                style={{ width: '36px', height: '36px' }}
               >
-                <ChevronLeft size={20} style={{ color: '#4A6B8A' }} />
+                <ChevronLeft size={18} style={{ color: '#4A6B8A' }} />
               </button>
-              <h2 className="text-[20px] font-bold min-w-[200px] text-center" style={{ color: '#081B40' }}>
+              <h2 className="font-bold min-w-[200px] text-center" style={{ color: '#081B40', fontSize: 'var(--section-title)' }}>
                 {currentDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
               </h2>
               <button
                 onClick={() => navigateMonth('next')}
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                className="rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                style={{ width: '36px', height: '36px' }}
               >
-                <ChevronRight size={20} style={{ color: '#4A6B8A' }} />
+                <ChevronRight size={18} style={{ color: '#4A6B8A' }} />
               </button>
             </div>
             <button
               onClick={() => setCurrentDate(new Date())}
-              className="px-5 py-2 rounded-full text-[13px] font-semibold transition-all hover:shadow-lg"
+              className="rounded-full font-semibold transition-all hover:shadow-lg"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
                 color: '#FFFFFF',
                 boxShadow: '0 2px 8px rgba(74, 144, 232, 0.3)',
@@ -179,7 +183,7 @@ export function ScheduleScreen() {
                   <div
                     key={index}
                     onClick={() => handleDayClick(date)}
-                    className={`relative p-2 rounded-xl border-2 transition-all ${
+                    className={`relative rounded-xl border-2 transition-all ${
                       isCurrent 
                         ? isTodayDate
                           ? 'cursor-pointer hover:shadow-md'
@@ -187,20 +191,23 @@ export function ScheduleScreen() {
                         : 'cursor-default opacity-50'
                     }`}
                     style={{
-                      minHeight: '100px',
+                      minHeight: '80px',
+                      padding: 'var(--card-padding)',
                       borderColor: isTodayDate ? '#4A90E8' : isCurrent ? 'rgba(220, 236, 246, 0.6)' : 'transparent',
                       background: isTodayDate ? 'rgba(74, 144, 232, 0.05)' : isCurrent ? 'rgba(255, 255, 255, 0.9)' : 'rgba(248, 250, 252, 0.5)',
                     }}
                   >
                     {/* Day Number */}
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[14px] font-bold" style={{
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold" style={{
+                        fontSize: 'var(--card-title)',
                         color: isTodayDate ? '#4A90E8' : isCurrent ? '#081B40' : '#9EC5E0'
                       }}>
                         {date.getDate()}
                       </span>
                       {isTodayDate && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{
+                        <span className="font-semibold px-2 py-0.5 rounded-full" style={{
+                          fontSize: 'var(--metadata)',
                           background: 'rgba(74, 144, 232, 0.1)',
                           color: '#4A90E8',
                         }}>

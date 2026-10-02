@@ -129,3 +129,65 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DENSITY & SCALE TOKENS — HOME AS MASTER REFERENCE
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Typography Scale */
+  --page-title: 30px;
+  --page-subtitle: 14px;
+  --section-title: 16px;
+  --card-title: 14px;
+  --body: 13px;
+  --metadata: 11px;
+
+  /* Spacing */
+  --page-gap: 16px;
+  --section-gap: 14px;
+  --card-gap: 10px;
+
+  /* Padding */
+  --panel-padding: 20px;
+  --card-padding: 16px;
+  --control-padding-x: 12px;
+  --control-padding-y: 8px;
+
+  /* Control Heights */
+  --control-height: 38px;
+  --compact-control-height: 32px;
+
+  /* Radii */
+  --major-radius: 24px;
+  --card-radius: 16px;
+  --control-radius: 12px;
+  --pill-radius: 999px;
+
+  /* Icon Sizes */
+  --icon-utility: 16px;
+  --icon-standard: 18px;
+  --icon-important: 20px;
+}
+
+/* Compact density for smaller viewports */
+@media (max-height: 900px) {
+  :root {
+    --page-title: 26px;
+    --page-subtitle: 13px;
+    --section-title: 15px;
+    --card-title: 13px;
+    --body: 12px;
+    --metadata: 10px;
+    
+    --page-gap: 12px;
+    --section-gap: 10px;
+    --card-gap: 8px;
+    
+    --panel-padding: 16px;
+    --card-padding: 14px;
+    
+    --control-height: 36px;
+    --compact-control-height: 30px;
+  }
+}

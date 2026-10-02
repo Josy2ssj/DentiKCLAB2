@@ -39,65 +39,76 @@ export function InventoryScreen() {
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ padding: 'clamp(16px, 3vh, 32px)' }}>
+    <div className="h-full flex flex-col" style={{ padding: 'var(--page-gap)' }}>
       {/* Header */}
-      <div className="shrink-0 mb-6">
-        <h1 className="text-[32px] font-bold tracking-tight" style={{ color: '#081B40' }}>
+      <div className="shrink-0 mb-4">
+        <h1 className="font-bold tracking-tight" style={{ color: '#081B40', fontSize: 'var(--page-title)', lineHeight: '1.2' }}>
           Inventario
         </h1>
-        <p className="text-[14px] mt-1" style={{ color: '#6B8CA5' }}>
+        <p className="mt-1" style={{ color: '#6B8CA5', fontSize: 'var(--page-subtitle)' }}>
           Control de materiales y stock del laboratorio.
         </p>
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-1 min-h-0 flex gap-6">
+      <div className="flex-1 min-h-0 flex gap-4">
         {/* Left: Main Content */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Statistics Cards */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(74, 144, 232, 0.1)' }}>
-                  <Package size={20} style={{ color: '#4A90E8' }} />
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            <div className="bg-white/90 backdrop-blur-sm shadow-sm" style={{ borderRadius: 'var(--card-radius)', padding: 'var(--card-padding)' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="rounded-full flex items-center justify-center" style={{ width: '32px', height: '32px', background: 'rgba(74, 144, 232, 0.1)' }}>
+                  <Package size={16} style={{ color: '#4A90E8' }} />
                 </div>
               </div>
-              <p className="text-[11px] font-medium mb-1" style={{ color: '#6B8CA5' }}>Total de materiales</p>
-              <p className="text-[28px] font-bold" style={{ color: '#081B40' }}>{totalMaterials}</p>
+              <p className="font-medium mb-0.5" style={{ fontSize: 'var(--metadata)', color: '#6B8CA5' }}>Total de materiales</p>
+              <p className="font-bold" style={{ fontSize: '22px', color: '#081B40' }}>{totalMaterials}</p>
             </div>
 
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'rgba(16, 185, 129, 0.1)' }}>
-                  <Tag size={20} style={{ color: '#10B981' }} />
+            <div className="bg-white/90 backdrop-blur-sm shadow-sm" style={{ borderRadius: 'var(--card-radius)', padding: 'var(--card-padding)' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="rounded-full flex items-center justify-center" style={{ width: '32px', height: '32px', background: 'rgba(16, 185, 129, 0.1)' }}>
+                  <Tag size={16} style={{ color: '#10B981' }} />
                 </div>
               </div>
-              <p className="text-[11px] font-medium mb-1" style={{ color: '#6B8CA5' }}>Categorías</p>
-              <p className="text-[28px] font-bold" style={{ color: '#081B40' }}>{categories}</p>
+              <p className="font-medium mb-0.5" style={{ fontSize: 'var(--metadata)', color: '#6B8CA5' }}>Categorías</p>
+              <p className="font-bold" style={{ fontSize: '22px', color: '#081B40' }}>{categories}</p>
             </div>
 
-            <div className={`rounded-2xl p-5 shadow-sm ${lowStockItems.length > 0 ? 'bg-orange-50' : 'bg-white/90 backdrop-blur-sm'}`}>
-              <div className="flex items-center gap-3 mb-2">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${lowStockItems.length > 0 ? '' : ''}`}
-                  style={{ background: lowStockItems.length > 0 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(158, 204, 220, 0.1)' }}>
-                  <AlertTriangle size={20} style={{ color: lowStockItems.length > 0 ? '#F59E0B' : '#9ECCDC' }} />
+            <div className={`shadow-sm ${lowStockItems.length > 0 ? '' : 'bg-white/90 backdrop-blur-sm'}`} 
+              style={{ 
+                borderRadius: 'var(--card-radius)', 
+                padding: 'var(--card-padding)',
+                background: lowStockItems.length > 0 ? 'rgba(245, 158, 11, 0.05)' : undefined
+              }}>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="rounded-full flex items-center justify-center" 
+                  style={{ 
+                    width: '32px', 
+                    height: '32px', 
+                    background: lowStockItems.length > 0 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(158, 204, 220, 0.1)'
+                  }}>
+                  <AlertTriangle size={16} style={{ color: lowStockItems.length > 0 ? '#F59E0B' : '#9ECCDC' }} />
                 </div>
               </div>
-              <p className="text-[11px] font-medium mb-1" style={{ color: '#6B8CA5' }}>Stock bajo</p>
-              <p className="text-[28px] font-bold" style={{ color: lowStockItems.length > 0 ? '#F59E0B' : '#081B40' }}>
+              <p className="font-medium mb-0.5" style={{ fontSize: 'var(--metadata)', color: '#6B8CA5' }}>Stock bajo</p>
+              <p className="font-bold" style={{ fontSize: '22px', color: lowStockItems.length > 0 ? '#F59E0B' : '#081B40' }}>
                 {lowStockItems.length}
               </p>
             </div>
           </div>
 
           {/* Main Panel */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 min-h-0 flex flex-col">
+          <div className="bg-white/90 backdrop-blur-sm shadow-sm flex-1 min-h-0 flex flex-col" style={{ borderRadius: 'var(--card-radius)', padding: 'var(--panel-padding)' }}>
             {/* Toolbar */}
-            <div className="flex items-center gap-3 mb-5 flex-wrap">
+            <div className="flex items-center gap-2 mb-4 flex-wrap">
               <button 
                 onClick={() => setActiveCategory('all')}
-                className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all"
+                className="rounded-full font-semibold transition-all"
                 style={{
+                  padding: 'var(--control-padding-y) var(--control-padding-x)',
+                  fontSize: 'var(--body)',
                   background: activeCategory === 'all' ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'rgba(248, 250, 252, 0.9)',
                   color: activeCategory === 'all' ? '#FFFFFF' : '#4A6B8A',
                   boxShadow: activeCategory === 'all' ? '0 2px 8px rgba(74, 144, 232, 0.25)' : 'none',

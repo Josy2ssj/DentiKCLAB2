@@ -122,27 +122,29 @@ export function OrdersScreen() {
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ padding: 'clamp(16px, 3vh, 32px)' }}>
+    <div className="h-full flex flex-col" style={{ padding: 'var(--page-gap)' }}>
       {/* Header */}
-      <div className="shrink-0 mb-6">
-        <h1 className="text-[32px] font-bold tracking-tight" style={{ color: '#081B40' }}>
+      <div className="shrink-0 mb-4">
+        <h1 className="font-bold tracking-tight" style={{ color: '#081B40', fontSize: 'var(--page-title)', lineHeight: '1.2' }}>
           Órdenes
         </h1>
-        <p className="text-[14px] mt-1" style={{ color: '#6B8CA5' }}>
+        <p className="mt-1" style={{ color: '#6B8CA5', fontSize: 'var(--page-subtitle)' }}>
           Gestiona las órdenes de trabajo del laboratorio.
         </p>
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-1 min-h-0 flex gap-6">
+      <div className="flex-1 min-h-0 flex gap-4">
         {/* Left: Orders List */}
-        <div className="flex-1 flex flex-col min-w-0 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <div className="flex-1 flex flex-col min-w-0 bg-white/90 backdrop-blur-sm shadow-sm" style={{ borderRadius: 'var(--card-radius)', padding: 'var(--panel-padding)' }}>
           {/* Filters */}
-          <div className="flex items-center gap-2 mb-5 flex-wrap">
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
             <button 
               onClick={() => setActiveFilter('all')}
-              className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all"
+              className="rounded-full font-semibold transition-all"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: activeFilter === 'all' ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'rgba(248, 250, 252, 0.9)',
                 color: activeFilter === 'all' ? '#FFFFFF' : '#4A6B8A',
                 boxShadow: activeFilter === 'all' ? '0 2px 8px rgba(74, 144, 232, 0.25)' : 'none',
@@ -152,8 +154,10 @@ export function OrdersScreen() {
             </button>
             <button 
               onClick={() => setActiveFilter('pending')}
-              className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all"
+              className="rounded-full font-semibold transition-all"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: activeFilter === 'pending' ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'rgba(248, 250, 252, 0.9)',
                 color: activeFilter === 'pending' ? '#FFFFFF' : '#4A6B8A',
                 boxShadow: activeFilter === 'pending' ? '0 2px 8px rgba(74, 144, 232, 0.25)' : 'none',
@@ -163,8 +167,10 @@ export function OrdersScreen() {
             </button>
             <button 
               onClick={() => setActiveFilter('in_progress')}
-              className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all"
+              className="rounded-full font-semibold transition-all"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: activeFilter === 'in_progress' ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'rgba(248, 250, 252, 0.9)',
                 color: activeFilter === 'in_progress' ? '#FFFFFF' : '#4A6B8A',
                 boxShadow: activeFilter === 'in_progress' ? '0 2px 8px rgba(74, 144, 232, 0.25)' : 'none',
@@ -174,8 +180,10 @@ export function OrdersScreen() {
             </button>
             <button 
               onClick={() => setActiveFilter('delivered')}
-              className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all"
+              className="rounded-full font-semibold transition-all"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: activeFilter === 'delivered' ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'rgba(248, 250, 252, 0.9)',
                 color: activeFilter === 'delivered' ? '#FFFFFF' : '#4A6B8A',
                 boxShadow: activeFilter === 'delivered' ? '0 2px 8px rgba(74, 144, 232, 0.25)' : 'none',
@@ -185,8 +193,10 @@ export function OrdersScreen() {
             </button>
             <button 
               onClick={() => setActiveFilter('late')}
-              className="px-4 py-2 rounded-full text-[13px] font-semibold transition-all flex items-center gap-1.5"
+              className="rounded-full font-semibold transition-all flex items-center gap-1.5"
               style={{
+                padding: 'var(--control-padding-y) var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: activeFilter === 'late' ? 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)' : 'rgba(248, 250, 252, 0.9)',
                 color: activeFilter === 'late' ? '#FFFFFF' : '#4A6B8A',
                 boxShadow: activeFilter === 'late' ? '0 2px 8px rgba(239, 68, 68, 0.25)' : 'none',
@@ -198,26 +208,32 @@ export function OrdersScreen() {
           </div>
 
           {/* Search + New Order */}
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-3 mb-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2" size={18} style={{ color: '#6B8CA5' }} />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={16} style={{ color: '#6B8CA5' }} />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar órdenes..."
-                className="w-full pl-11 pr-4 py-2.5 rounded-full text-[13px] transition-all"
+                className="w-full pl-10 pr-4 transition-all"
                 style={{
+                  height: 'var(--control-height)',
+                  fontSize: 'var(--body)',
                   background: 'rgba(248, 250, 252, 0.9)',
                   border: '1px solid rgba(220, 236, 246, 0.6)',
+                  borderRadius: 'var(--pill-radius)',
                   color: '#081B40',
                 }}
               />
             </div>
             <button 
               onClick={() => setShowNewOrderModal(true)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all hover:shadow-lg"
+              className="flex items-center gap-2 rounded-full font-semibold transition-all hover:shadow-lg"
               style={{
+                height: 'var(--control-height)',
+                padding: '0 var(--control-padding-x)',
+                fontSize: 'var(--body)',
                 background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
                 color: '#FFFFFF',
                 boxShadow: '0 2px 8px rgba(74, 144, 232, 0.3)',
@@ -244,8 +260,9 @@ export function OrdersScreen() {
                     <div 
                       key={order.id} 
                       onClick={() => handleOrderClick(order)}
-                      className="flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all group"
+                      className="flex items-center gap-3 rounded-xl cursor-pointer transition-all group"
                       style={{
+                        padding: 'var(--card-padding)',
                         background: selectedOrder?.id === order.id ? 'rgba(74, 144, 232, 0.05)' : 'transparent',
                         border: selectedOrder?.id === order.id ? '2px solid rgba(74, 144, 232, 0.2)' : '2px solid transparent',
                       }}
@@ -262,8 +279,9 @@ export function OrdersScreen() {
                     >
                       {/* Avatar */}
                       <div 
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
+                        className="w-9 h-9 rounded-full flex items-center justify-center font-bold shrink-0"
                         style={{
+                          fontSize: 'var(--metadata)',
                           background: `${statusColor.bg}`,
                           color: statusColor.text,
                         }}
@@ -339,25 +357,28 @@ export function OrdersScreen() {
 
         {/* Right: Detail Panel */}
         {showDetailPanel && selectedOrder && (
-          <div className="w-96 bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm flex flex-col">
+          <div className="bg-white/90 backdrop-blur-sm shadow-sm flex flex-col" style={{ width: '380px', borderRadius: 'var(--card-radius)' }}>
             {/* Panel Header */}
-            <div className="flex items-center justify-between p-5 border-b border-slate-100">
+            <div className="flex items-center justify-between border-b border-slate-100" style={{ padding: 'var(--panel-padding)' }}>
               <button 
                 onClick={() => setShowDetailPanel(false)}
-                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                className="rounded-full flex items-center justify-center hover:bg-slate-100 transition-all"
+                style={{ width: '32px', height: '32px' }}
               >
                 <ArrowLeft size={16} style={{ color: '#4A6B8A' }} />
               </button>
               <div className="flex items-center gap-2">
-                <button className="px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:shadow-md"
+                <button className="rounded-full font-semibold transition-all hover:shadow-md"
                   style={{
+                    padding: 'var(--control-padding-y) var(--control-padding-x)',
+                    fontSize: 'var(--body)',
                     background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
                     color: '#FFFFFF',
                   }}
                 >
                   Editar
                 </button>
-                <button className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-all">
+                <button className="rounded-full flex items-center justify-center hover:bg-slate-100 transition-all" style={{ width: '32px', height: '32px' }}>
                   <MoreVertical size={16} style={{ color: '#4A6B8A' }} />
                 </button>
               </div>
