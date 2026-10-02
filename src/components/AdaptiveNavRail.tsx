@@ -25,10 +25,10 @@ export function AdaptiveNavRail() {
         <div
           className="absolute inset-0 rounded-[32px]"
           style={{
-            background: 'rgba(255, 255, 255, 0.7)',
+            background: 'rgba(248, 250, 252, 0.92)',
             backdropFilter: 'blur(20px)',
-            boxShadow: '0 8px 32px rgba(17, 38, 74, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-            border: '1px solid rgba(255, 255, 255, 0.8)',
+            boxShadow: '0 8px 32px rgba(74, 144, 232, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(220, 236, 246, 0.8)',
           }}
         />
 
@@ -53,10 +53,10 @@ export function AdaptiveNavRail() {
                 aria-label={item.label}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(40, 120, 255, 0.08)';
+                    e.currentTarget.style.background = 'rgba(220, 236, 246, 0.6)';
                     e.currentTarget.style.transform = 'scale(1.05)';
                     const icon = e.currentTarget.querySelector('svg');
-                    if (icon) icon.style.color = '#2878FF';
+                    if (icon) icon.style.color = '#4A90E8';
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -64,7 +64,7 @@ export function AdaptiveNavRail() {
                     e.currentTarget.style.background = 'transparent';
                     e.currentTarget.style.transform = 'scale(1)';
                     const icon = e.currentTarget.querySelector('svg');
-                    if (icon) icon.style.color = '#10264A';
+                    if (icon) icon.style.color = '#5A7A94';
                   }
                 }}
                 onMouseDown={(e) => {
@@ -79,9 +79,9 @@ export function AdaptiveNavRail() {
                   <div
                     className="absolute inset-0 pointer-events-none animate-fadeIn"
                     style={{
-                      background: 'linear-gradient(135deg, #2878FF 0%, #1D65E0 100%)',
+                      background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
                       borderRadius: '14px',
-                      boxShadow: '0 0 20px rgba(40, 120, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                      boxShadow: '0 4px 16px rgba(74, 144, 232, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
                       animation: 'fadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1)',
                     }}
                   />
@@ -92,7 +92,7 @@ export function AdaptiveNavRail() {
                   strokeWidth={isActive ? 2.2 : 1.8}
                   className="relative z-10 pointer-events-none"
                   style={{
-                    color: isActive ? '#FFFFFF' : '#10264A',
+                    color: isActive ? '#FFFFFF' : '#5A7A94',
                     transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
                   }}
                 />
@@ -113,16 +113,16 @@ export function AdaptiveNavRail() {
             title="Configuración"
             aria-label="Configuración"
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(40, 120, 255, 0.08)';
+              e.currentTarget.style.background = 'rgba(220, 236, 246, 0.6)';
               e.currentTarget.style.transform = 'scale(1.05)';
               const icon = e.currentTarget.querySelector('svg');
-              if (icon) icon.style.color = '#2878FF';
+              if (icon) icon.style.color = '#4A90E8';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.transform = 'scale(1)';
               const icon = e.currentTarget.querySelector('svg');
-              if (icon) icon.style.color = '#10264A';
+              if (icon) icon.style.color = '#5A7A94';
             }}
             onMouseDown={(e) => {
               e.currentTarget.style.transform = 'scale(0.95)';
@@ -136,7 +136,7 @@ export function AdaptiveNavRail() {
               strokeWidth={1.8}
               className="relative z-10 pointer-events-none"
               style={{
-                color: '#10264A',
+                color: '#5A7A94',
                 transition: 'all 180ms cubic-bezier(0.22, 1, 0.36, 1)',
               }}
             />

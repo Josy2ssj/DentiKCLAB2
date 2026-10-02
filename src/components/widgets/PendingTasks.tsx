@@ -21,38 +21,38 @@ export default function PendingTasks() {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center"
-            style={{ background: 'rgba(40, 120, 255, 0.1)' }}
+            className="w-7 h-7 rounded-full flex items-center justify-center"
+            style={{ background: 'rgba(158, 203, 228, 0.3)' }}
           >
-            <FileText size={14} style={{ color: '#2878FF' }} />
+            <FileText size={14} style={{ color: '#4A90E8' }} />
           </div>
-          <p className="text-[13px] font-bold" style={{ color: '#10264A' }}>
+          <p className="text-[13px] font-bold" style={{ color: '#2D5F8D' }}>
             Lista de tareas
           </p>
         </div>
         <button
           className="text-[11px] font-semibold transition-all duration-150 hover:underline"
-          style={{ color: '#2878FF' }}
+          style={{ color: '#4A90E8' }}
         >
           Ver todas &gt;
         </button>
         <button
           className="w-6 h-6 rounded-full flex items-center justify-center"
           style={{
-            background: 'linear-gradient(135deg, #2878FF 0%, #1D65E0 100%)',
-            boxShadow: '0 2px 6px rgba(40, 120, 255, 0.25)',
+            background: 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)',
+            boxShadow: '0 2px 6px rgba(74, 144, 232, 0.3)',
             transition: 'all 150ms cubic-bezier(0.22, 1, 0.36, 1)',
           }}
           aria-label="Agregar tarea"
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.08)';
-            e.currentTarget.style.boxShadow = '0 3px 8px rgba(40, 120, 255, 0.35)';
+            e.currentTarget.style.boxShadow = '0 3px 8px rgba(74, 144, 232, 0.4)';
             const icon = e.currentTarget.querySelector('svg');
             if (icon) icon.style.transform = 'rotate(8deg)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 2px 6px rgba(40, 120, 255, 0.25)';
+            e.currentTarget.style.boxShadow = '0 2px 6px rgba(74, 144, 232, 0.3)';
             const icon = e.currentTarget.querySelector('svg');
             if (icon) icon.style.transform = 'rotate(0deg)';
           }}
@@ -76,16 +76,16 @@ export default function PendingTasks() {
             className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-left w-full group"
             style={{ transition: 'all 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#F8FAFC';
+              e.currentTarget.style.background = 'rgba(220, 236, 246, 0.4)';
               const timePill = e.currentTarget.querySelector('.task-time');
-              if (timePill) (timePill as HTMLElement).style.background = '#E2E8F0';
+              if (timePill) (timePill as HTMLElement).style.background = 'rgba(158, 203, 228, 0.3)';
               const colorBar = e.currentTarget.querySelector('.task-color-bar');
               if (colorBar) (colorBar as HTMLElement).style.opacity = '0.9';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               const timePill = e.currentTarget.querySelector('.task-time');
-              if (timePill) (timePill as HTMLElement).style.background = '#F1F5F9';
+              if (timePill) (timePill as HTMLElement).style.background = 'rgba(248, 250, 252, 0.8)';
               const colorBar = e.currentTarget.querySelector('.task-color-bar');
               if (colorBar) (colorBar as HTMLElement).style.opacity = '0.6';
             }}
@@ -115,22 +115,22 @@ export default function PendingTasks() {
               <p
                 className="text-[11.5px] font-medium truncate"
                 style={{
-                  color: task.done ? '#7B8BA5' : '#111A35',
+                  color: task.done ? '#6B8CA5' : '#2D5F8D',
                   textDecoration: task.done ? 'line-through' : 'none',
                   transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
               >
                 {task.title}
               </p>
-              <p className="text-[9.5px]" style={{ color: '#7B8BA5', transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
+              <p className="text-[9.5px]" style={{ color: '#6B8CA5', transition: 'all 200ms cubic-bezier(0.22, 1, 0.36, 1)' }}>
                 {task.subtitle}
               </p>
             </div>
 
             {/* Time */}
             <span
-              className="text-[9.5px] font-semibold px-1.5 py-0.5 rounded shrink-0 task-time"
-              style={{ background: '#F1F5F9', color: '#3D4F6F', transition: 'background 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
+              className="text-[9.5px] font-semibold px-1.5 py-0.5 rounded-full shrink-0 task-time"
+              style={{ background: 'rgba(248, 250, 252, 0.8)', color: '#4A6B8A', transition: 'background 160ms cubic-bezier(0.22, 1, 0.36, 1)' }}
             >
               {task.time}
             </span>

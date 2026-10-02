@@ -91,20 +91,20 @@ export function Timeline() {
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <h3 className="text-[15px] font-bold" style={{ color: '#10264A' }}>
+          <h3 className="text-[15px] font-bold" style={{ color: '#2D5F8D' }}>
             Órdenes
           </h3>
           
           {/* Time Scale Selector */}
-          <div className="flex gap-1 p-1 rounded-full" style={{ background: 'rgba(241, 245, 249, 0.8)' }}>
+          <div className="flex gap-1 p-1 rounded-full" style={{ background: 'rgba(220, 236, 246, 0.5)' }}>
             {(['week', 'month', 'year'] as TimeScale[]).map((scale) => (
               <button
                 key={scale}
                 onClick={() => setTimeScale(scale)}
                 className="px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-200"
                 style={{
-                  background: timeScale === scale ? 'linear-gradient(135deg, #10264A 0%, #1A3A5C 100%)' : 'transparent',
-                  color: timeScale === scale ? '#FFFFFF' : '#4A5568',
+                  background: timeScale === scale ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'transparent',
+                  color: timeScale === scale ? '#FFFFFF' : '#4A6B8A',
                 }}
               >
                 {scale === 'week' ? 'Semana' : scale === 'month' ? 'Mes' : 'Año'}
@@ -117,52 +117,52 @@ export function Timeline() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigateTimeline('prev')}
-            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
             aria-label="Anterior"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6B8A" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
           
-          <div className="px-3 py-1.5 rounded-lg text-[12px] font-medium" style={{ background: 'rgba(241, 245, 249, 0.8)', color: '#10264A' }}>
+          <div className="px-3 py-1.5 rounded-full text-[12px] font-medium" style={{ background: 'rgba(248, 250, 252, 0.9)', color: '#2D5F8D', border: '1px solid rgba(220, 236, 246, 0.6)' }}>
             {formatDateRange()}
           </div>
           
           <button
             onClick={() => navigateTimeline('next')}
-            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
             aria-label="Siguiente"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6B8A" strokeWidth="2">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
 
           <button
             onClick={goToToday}
-            className="px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-150 hover:bg-gray-100"
-            style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}
+            className="px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all duration-150 hover:bg-gray-100"
+            style={{ background: 'rgba(158, 203, 228, 0.3)', color: '#4A90E8' }}
           >
             Hoy
           </button>
 
           <button
-            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
             aria-label="Buscar"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7B8BA5" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B8CA5" strokeWidth="2">
               <circle cx="11" cy="11" r="8" />
               <path d="M21 21l-4.35-4.35" />
             </svg>
           </button>
 
           <button
-            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
-            style={{ background: 'rgba(40, 120, 255, 0.1)' }}
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+            style={{ background: 'rgba(158, 203, 228, 0.3)' }}
             aria-label="Nueva orden"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2878FF" strokeWidth="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A90E8" strokeWidth="2">
               <path d="M12 5v14M5 12h14" />
             </svg>
           </button>
@@ -187,10 +187,10 @@ export function Timeline() {
                     transform: 'translateX(-50%)',
                   }}
                 >
-                  <span className="text-[10px] font-medium" style={{ color: '#7B8BA5' }}>
+                  <span className="text-[10px] font-medium" style={{ color: '#6B8CA5' }}>
                     {date.toLocaleDateString('es-ES', { weekday: 'short' })}
                   </span>
-                  <span className="text-[12px] font-bold" style={{ color: '#10264A' }}>
+                  <span className="text-[12px] font-bold" style={{ color: '#2D5F8D' }}>
                     {date.getDate()}
                   </span>
                 </div>
@@ -203,7 +203,7 @@ export function Timeline() {
             className="absolute left-0 right-0 h-[2px]"
             style={{ 
               top: '80px',
-              background: 'linear-gradient(90deg, transparent 0%, #CBD5E1 10%, #CBD5E1 90%, transparent 100%)' 
+              background: 'linear-gradient(90deg, transparent 0%, #9EC5E0 10%, #9EC5E0 90%, transparent 100%)' 
             }}
           />
 
@@ -256,7 +256,7 @@ export function Timeline() {
                               key={order.id}
                               d={`M ${startX}% ${startY} C ${control1X}% ${control1Y}, ${control2X}% ${control2Y}, ${endX}% ${endY}`}
                               fill="none"
-                              stroke="#CBD5E1"
+                              stroke="#9EC5E0"
                               strokeWidth="1.5"
                               strokeLinecap="round"
                               style={{ opacity: 0.6 }}
@@ -297,7 +297,7 @@ export function Timeline() {
                       {dateOrders.length > 3 && (
                         <div 
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-semibold px-2 py-1 rounded-full cursor-pointer transition-all duration-150 hover:scale-105"
-                          style={{ background: 'rgba(40, 120, 255, 0.1)', color: '#2878FF' }}
+                          style={{ background: 'rgba(158, 203, 228, 0.3)', color: '#4A90E8' }}
                         >
                           +{dateOrders.length - 3}
                         </div>
@@ -311,15 +311,15 @@ export function Timeline() {
                     style={{
                       width: hasOrders ? '12px' : '8px',
                       height: hasOrders ? '12px' : '8px',
-                      background: hasOrders ? '#2878FF' : '#CBD5E1',
-                      boxShadow: hasOrders ? '0 0 0 4px rgba(40, 120, 255, 0.15)' : 'none',
-                      border: isToday ? '2px solid #2878FF' : 'none',
+                      background: hasOrders ? '#4A90E8' : '#9EC5E0',
+                      boxShadow: hasOrders ? '0 0 0 4px rgba(74, 144, 232, 0.2)' : 'none',
+                      border: isToday ? '2px solid #4A90E8' : 'none',
                     }}
                   />
 
                   {/* Today Indicator */}
                   {isToday && (
-                    <div className="mt-2 text-[9px] font-bold" style={{ color: '#2878FF' }}>
+                    <div className="mt-2 text-[9px] font-bold" style={{ color: '#4A90E8' }}>
                       HOY
                     </div>
                   )}
@@ -336,9 +336,9 @@ export function Timeline() {
           <div className="flex items-center justify-between">
             <button
               onClick={() => navigateTimeline('prev')}
-              className="w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+              className="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A6B8A" strokeWidth="2">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
@@ -357,8 +357,8 @@ export function Timeline() {
                     onClick={() => setCurrentDate(weekStart)}
                     className="px-3 py-1.5 rounded-full text-[10px] font-semibold transition-all duration-200"
                     style={{
-                      background: isCurrentWeek ? 'linear-gradient(135deg, #10264A 0%, #1A3A5C 100%)' : 'transparent',
-                      color: isCurrentWeek ? '#FFFFFF' : '#7B8BA5',
+                      background: isCurrentWeek ? 'linear-gradient(135deg, #4A90E8 0%, #3E83DE 100%)' : 'transparent',
+                      color: isCurrentWeek ? '#FFFFFF' : '#6B8CA5',
                     }}
                   >
                     {weekStart.getDate()}–{weekEnd.getDate()}
@@ -369,9 +369,9 @@ export function Timeline() {
 
             <button
               onClick={() => navigateTimeline('next')}
-              className="w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
+              className="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-150 hover:bg-gray-100"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A6B8A" strokeWidth="2">
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>

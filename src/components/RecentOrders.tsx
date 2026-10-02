@@ -13,11 +13,11 @@ export function RecentOrders() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return { main: '#F59E0B', bg: 'rgba(245, 158, 11, 0.1)' };
-      case 'in_progress': return { main: '#2878FF', bg: 'rgba(40, 120, 255, 0.1)' };
-      case 'ready': return { main: '#10B981', bg: 'rgba(16, 185, 129, 0.1)' };
-      case 'delivered': return { main: '#8B5CF6', bg: 'rgba(139, 92, 246, 0.1)' };
-      default: return { main: '#CBD5E1', bg: 'rgba(203, 213, 225, 0.1)' };
+      case 'pending': return { main: '#F59E0B', bg: 'rgba(245, 158, 11, 0.15)' };
+      case 'in_progress': return { main: '#4A90E8', bg: 'rgba(74, 144, 232, 0.15)' };
+      case 'ready': return { main: '#10B981', bg: 'rgba(16, 185, 129, 0.15)' };
+      case 'delivered': return { main: '#5A9FD4', bg: 'rgba(90, 159, 212, 0.15)' };
+      default: return { main: '#9ECCDC', bg: 'rgba(158, 204, 220, 0.15)' };
     }
   };
 
@@ -47,10 +47,10 @@ export function RecentOrders() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div
-                className="w-7 h-7 rounded-lg flex items-center justify-center"
-                style={{ background: 'rgba(40, 120, 255, 0.1)' }}
+                className="w-7 h-7 rounded-full flex items-center justify-center"
+                style={{ background: 'rgba(158, 203, 228, 0.3)' }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2878FF" strokeWidth="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A90E8" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                   <path d="M14 2v6h6" />
                   <path d="M16 13H8" />
@@ -58,13 +58,13 @@ export function RecentOrders() {
                   <path d="M10 9H8" />
                 </svg>
               </div>
-              <h3 className="text-[13px] font-bold" style={{ color: '#10264A' }}>
+              <h3 className="text-[13px] font-bold" style={{ color: '#2D5F8D' }}>
                 Órdenes recientes
               </h3>
             </div>
             <button
               className="text-[11px] font-semibold transition-all duration-150 hover:underline"
-              style={{ color: '#2878FF' }}
+              style={{ color: '#4A90E8' }}
             >
               Ver todas &gt;
             </button>
@@ -95,17 +95,17 @@ export function RecentOrders() {
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="text-[12px] font-semibold truncate" style={{ color: '#111A35' }}>
+                  <div className="text-[12px] font-semibold truncate" style={{ color: '#2D5F8D' }}>
                     {order.patient}
                   </div>
-                  <div className="text-[10px] truncate mt-0.5" style={{ color: '#7B8BA5' }}>
+                  <div className="text-[10px] truncate mt-0.5" style={{ color: '#6B8CA5' }}>
                     {order.treatment}
                   </div>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[9px] font-mono font-semibold" style={{ color: '#2878FF' }}>
+                    <span className="text-[9px] font-mono font-semibold" style={{ color: '#4A90E8' }}>
                       {order.id}
                     </span>
-                    <span className="text-[9px]" style={{ color: '#7B8BA5' }}>
+                    <span className="text-[9px]" style={{ color: '#6B8CA5' }}>
                       {formatDate(order.requestedDate)}
                     </span>
                   </div>
@@ -128,7 +128,7 @@ export function RecentOrders() {
                     stroke="currentColor"
                     strokeWidth="2"
                     className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ color: '#7B8BA5' }}
+                    style={{ color: '#6B8CA5' }}
                   >
                     <path d="M9 18l6-6-6-6" />
                   </svg>
