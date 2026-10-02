@@ -3,11 +3,11 @@ import { FlaskConical, MoreHorizontal } from 'lucide-react';
 
 const data = [
   { name: 'Alineadores', value: 45, color: '#4A90E8' },
-  { name: 'Retenedores', value: 32, color: '#5A9FD4' },
-  { name: 'Modelos', value: 28, color: '#6BAED6' },
-  { name: 'Guías quirúrgicas', value: 22, color: '#7BB8D8' },
-  { name: 'Guardas', value: 18, color: '#8CC2DA' },
-  { name: 'Otros', value: 15, color: '#9ECCDC' },
+  { name: 'Retenedores', value: 32, color: '#8CC5F2' },
+  { name: 'Modelos', value: 28, color: '#10B981' },
+  { name: 'Guías quirúrgicas', value: 22, color: '#8B5CF6' },
+  { name: 'Guardas', value: 18, color: '#F59E0B' },
+  { name: 'Otros', value: 15, color: '#EF4444' },
 ];
 
 const total = data.reduce((sum, d) => sum + d.value, 0);

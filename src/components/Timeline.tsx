@@ -10,8 +10,8 @@ export function Timeline() {
   const [timeScale, setTimeScale] = useState<TimeScale>('week');
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Get orders with delivery dates
-  const ordersWithDates = orders.filter(order => order.deliveryDate);
+  // Get orders with requested delivery dates
+  const ordersWithDates = orders.filter(order => order.requestedDate);
 
   // Generate timeline dates based on scale
   const getTimelineDates = () => {
@@ -45,10 +45,10 @@ export function Timeline() {
 
   const timelineDates = getTimelineDates();
 
-  // Group orders by date
+  // Group orders by requested delivery date
   const getOrdersByDate = (date: Date) => {
     const dateStr = date.toISOString().split('T')[0];
-    return ordersWithDates.filter(order => order.deliveryDate === dateStr);
+    return ordersWithDates.filter(order => order.requestedDate === dateStr);
   };
 
   const navigateTimeline = (direction: 'prev' | 'next') => {

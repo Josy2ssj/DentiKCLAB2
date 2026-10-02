@@ -86,8 +86,8 @@ const initialOrders: Order[] = [
     treatment: 'Alineadores',
     arch: 'Superior',
     status: 'pending',
-    requestedDate: '2024-01-15',
-    deliveryDate: '2024-01-22',
+    requestedDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     notes: 'Caso de apiñamiento leve'
   },
   {
@@ -98,8 +98,8 @@ const initialOrders: Order[] = [
     treatment: 'Retenedores',
     arch: 'Inferior',
     status: 'in_progress',
-    requestedDate: '2024-01-10',
-    deliveryDate: '2024-01-17'
+    requestedDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
   },
   {
     id: 'ORD-003',
@@ -109,8 +109,8 @@ const initialOrders: Order[] = [
     treatment: 'Modelos',
     arch: 'Ambos',
     status: 'ready',
-    requestedDate: '2024-01-08',
-    deliveryDate: '2024-01-15'
+    requestedDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
   },
   {
     id: 'ORD-004',
@@ -120,8 +120,31 @@ const initialOrders: Order[] = [
     treatment: 'Guías Quirúrgicas',
     arch: 'Superior',
     status: 'delivered',
-    requestedDate: '2024-01-05',
-    deliveryDate: '2024-01-12'
+    requestedDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+  },
+  {
+    id: 'ORD-005',
+    patient: 'Laura Martínez',
+    clinic: 'Sonrisa Perfecta',
+    doctor: 'Dr. García',
+    treatment: 'Alineadores',
+    arch: 'Ambos',
+    status: 'pending',
+    requestedDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 11 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    notes: 'Tratamiento completo fase 2'
+  },
+  {
+    id: 'ORD-006',
+    patient: 'Roberto Sánchez',
+    clinic: 'Clínica Dental Sonrisa',
+    doctor: 'Dr. Rodríguez',
+    treatment: 'Guardas',
+    arch: 'Superior',
+    status: 'in_progress',
+    requestedDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    deliveryDate: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
   }
 ];
 
